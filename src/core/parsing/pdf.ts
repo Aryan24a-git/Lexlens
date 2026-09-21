@@ -26,14 +26,10 @@ async function getPdfJs() {
   // In browser context, configure the web worker
   if (
     typeof window !== "undefined" &&
-    typeof Worker !== "undefined" &&
     !pdfjs.GlobalWorkerOptions.workerSrc
   ) {
     try {
-      pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-        "pdfjs-dist/build/pdf.worker.min.mjs",
-        import.meta.url
-      ).toString();
+      pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
     } catch {
       // Fallback: worker stays default or disabled
     }

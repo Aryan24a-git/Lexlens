@@ -7,6 +7,8 @@ import {
   ANSWER_BASES,
   COMPARE_MODES,
   ACTION_TYPES,
+  type DocType,
+  type Perspective,
 } from "./enums";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -266,20 +268,39 @@ export type ChecklistItem = z.infer<typeof checklistItemSchema>;
 
 export const lawyerBriefSchema = z.object({
   documentMeta: z.object({
-    fileName: z.string(),
-    docType: z.enum(DOC_TYPES),
-    parties: z.array(z.string()),
-    perspective: z.enum(PERSPECTIVES),
-    generatedAt: z.string().datetime(),
+    fileName: z.string().optional().default("Document"),
+    docType: z.union([z.enum(DOC_TYPES), z.string()]).transform((val) => {
+      const v = val.toLowerCase();
+      return (DOC_TYPES as readonly string[]).includes(v) ? (v as any) : "other";
+    }),
+    parties: z.union([z.array(z.string()), z.string().transform((s) => [s])]).default(["Identified in agreement"]),
+    perspective: z.union([z.enum(PERSPECTIVES), z.string()]).transform((val) => {
+      const v = val.toLowerCase();
+      return (PERSPECTIVES as readonly string[]).includes(v) ? (v as any) : "other";
+    }),
+    generatedAt: z.string().optional().default(() => new Date().toISOString()),
   }),
-  situationSummary: z.string().min(1).max(500),
+  situationSummary: z.string().min(1).transform((s) => s.slice(0, 800)),
   topRisks: z.array(
-    z.object({ headline: z.string(), clauseId: clauseIdSchema, level: z.enum(RISK_LEVELS) })
-  ),
-  keyTerms: z.array(z.object({ term: z.string(), meaning: z.string(), clauseId: clauseIdSchema })),
-  openQuestions: z.array(z.string()),
-  missingInfo: z.array(z.string()),
-  suggestedAgenda: z.array(z.string()),
+    z.object({
+      headline: z.string().transform((h) => h.slice(0, 200)),
+      clauseId: z.string().transform((c) => (c.startsWith("C") ? c : `C${c}`)),
+      level: z.union([z.enum(RISK_LEVELS), z.string()]).transform((l) => {
+        const v = l.toLowerCase();
+        return v === "high" || v === "medium" || v === "low" || v === "info" ? (v as any) : "info";
+      }),
+    })
+  ).optional().default([]),
+  keyTerms: z.array(
+    z.object({
+      term: z.string(),
+      meaning: z.string(),
+      clauseId: z.string().transform((c) => (c.startsWith("C") ? c : `C${c}`)),
+    })
+  ).optional().default([]),
+  openQuestions: z.array(z.string()).optional().default([]),
+  missingInfo: z.array(z.string()).optional().default([]),
+  suggestedAgenda: z.array(z.string()).optional().default([]),
   disclaimer: z
     .string()
     .default(
@@ -291,35 +312,51 @@ export type LawyerBrief = z.infer<typeof lawyerBriefSchema>;
 export const optionItemSchema = z.object({
   title: z.string().min(1),
   description: z.string().min(1),
-  pros: z.array(z.string()),
-  cons: z.array(z.string()),
-  citations: z.array(citationSchema).default([]),
+  pros: z.array(z.string()).optional().default([]),
+  cons: z.array(z.string()).optional().default([]),
+  citations: z.union([
+    z.array(citationSchema),
+    z.array(z.object({
+      clauseId: z.string().transform((c) => (c.startsWith("C") ? c : `C${c}`)),
+      quote: z.string().transform((q) => q.slice(0, 200)),
+      verified: z.boolean().optional().default(false),
+    })),
+    z.array(z.string()).transform((arr) => arr.map((s) => ({ clauseId: "C1", quote: s.slice(0, 200), verified: false }))),
+  ]).optional().default([]),
 });
 export type OptionItem = z.infer<typeof optionItemSchema>;
 
 export const optionsResultSchema = z.object({
-  scenario: z.string().min(1),
-  options: z.array(optionItemSchema),
-  nextSteps: z.array(z.string()),
-  deadlinesToWatch: z.array(z.string()),
-  questionsForProfessional: z.array(z.string()),
+  scenario: z.string().optional().default("Document review and next steps"),
+  options: z.array(optionItemSchema).optional().default([]),
+  nextSteps: z.array(z.string()).optional().default([]),
+  deadlinesToWatch: z.array(z.string()).optional().default([]),
+  questionsForProfessional: z.array(z.string()).optional().default([]),
   escalationAdvice: z.string().optional(),
 });
 export type OptionsResult = z.infer<typeof optionsResultSchema>;
 
 export const negotiateSuggestionSchema = z.object({
-  clauseId: clauseIdSchema,
+  clauseId: z.string().transform((c) => (c.startsWith("C") ? c : `C${c}`)),
   clauseHeading: z.string().optional(),
   problem: z.string().min(1),
   whyItMatters: z.string().min(1),
   alternativeWording: z.string().min(1),
   fallbackPosition: z.string().min(1),
-  citations: z.array(citationSchema).default([]),
+  citations: z.union([
+    z.array(citationSchema),
+    z.array(z.object({
+      clauseId: z.string().transform((c) => (c.startsWith("C") ? c : `C${c}`)),
+      quote: z.string().transform((q) => q.slice(0, 200)),
+      verified: z.boolean().optional().default(false),
+    })),
+    z.array(z.string()).transform((arr) => arr.map((s) => ({ clauseId: "C1", quote: s.slice(0, 200), verified: false }))),
+  ]).optional().default([]),
 });
 export type NegotiateSuggestion = z.infer<typeof negotiateSuggestionSchema>;
 
 export const negotiateResultSchema = z.object({
-  suggestions: z.array(negotiateSuggestionSchema),
+  suggestions: z.array(negotiateSuggestionSchema).optional().default([]),
 });
 export type NegotiateResult = z.infer<typeof negotiateResultSchema>;
 

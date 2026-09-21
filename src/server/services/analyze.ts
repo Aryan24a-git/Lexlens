@@ -125,7 +125,10 @@ export async function analyzeDocument(
   let detectedParties: string[] = [];
 
   try {
-    const fullSnippet = request.clauses.map((c) => c.text).join("\n\n");
+    const fullSnippet = request.clauses
+      .map((c) => c.text)
+      .join("\n\n")
+      .slice(0, 8000);
     const classifyPrompt = buildClassifyPrompt({ documentTextSnippet: fullSnippet });
     const preamble = buildPreamble({
       role: request.perspective,

@@ -18,7 +18,7 @@ const DEFAULT_ROLES = [
   { id: "employee", label: "Employee" },
   { id: "employer", label: "Employer" },
   { id: "customer", label: "Consumer / User" },
-  { id: "neutral", label: "Neutral / Overview" },
+  { id: "other", label: "Other / Overview" },
 ];
 
 /**

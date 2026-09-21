@@ -13,23 +13,37 @@ export const ASK_PROMPT_VERSION = "2026-09-20.1";
 export const askOutputSchema = z.object({
   text: z.string().optional().describe("The answer text"),
   answer: z.string().optional().describe("Fallback for text"),
-  basis: z.enum(ANSWER_BASES),
-  citations: z.array(citationSchema).default([]),
-  followUpQuestions: z.array(z.string()).max(3).default([]),
+  basis: z.union([z.enum(ANSWER_BASES), z.string()]).transform((val): "document" | "general_information" | "not_found" => {
+    const v = val.toLowerCase().trim();
+    if (v.includes("doc")) return "document";
+    if (v.includes("not") || v.includes("none")) return "not_found";
+    return "general_information";
+  }),
+  citations: z.union([
+    z.array(citationSchema),
+    z.array(z.object({
+      clauseId: z.string().transform((c) => (c.startsWith("C") ? c : `C${c}`)),
+      quote: z.string().transform((q) => q.slice(0, 200)),
+      verified: z.boolean().optional().default(false),
+    })),
+    z.array(z.string()).transform((arr) => arr.map((s) => ({ clauseId: "C1", quote: s.slice(0, 200), verified: false }))),
+  ]).optional().default([]),
+  followUpQuestions: z.array(z.string()).optional().default([]).transform((arr) => arr.slice(0, 3)),
   escalationTrigger: z.string().optional(),
-  nearestClauses: z.array(clauseIdSchema).optional(),
+  nearestClauses: z.array(z.string().transform((c) => (c.startsWith("C") ? c : `C${c}`))).optional(),
 }).transform((val) => ({
   ...val,
   text: val.text || val.answer || "No text provided.",
+  citations: (val.citations || []) as Array<{ clauseId: string; quote: string; verified: boolean }>,
 }));
 
 export type AskOutput = {
   text: string;
   basis: "document" | "general_information" | "not_found";
-  citations: any[];
+  citations: Array<{ clauseId: string; quote: string; verified: boolean }>;
   followUpQuestions: string[];
-  escalationTrigger?: string;
-  nearestClauses?: string[];
+  escalationTrigger?: string | undefined;
+  nearestClauses?: string[] | undefined;
 };
 
 export interface AskPromptParams {

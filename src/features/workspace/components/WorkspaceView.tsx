@@ -25,8 +25,7 @@ import { useAnalysisStream } from "@/features/analysis";
 import { AskPanel } from "@/features/ask";
 import { ActionsPanel } from "@/features/actions";
 import { Icon } from "@/ui/icons/Icon";
-import { cn } from "@/lib/utils";
-import type { RiskLevel, Perspective } from "@/core/domain/enums";
+import { type RiskLevel, type Perspective, PERSPECTIVES } from "@/core/domain/enums";
 
 /**
  * WorkspaceView — Interactive document intake, perspective selection,
@@ -116,9 +115,13 @@ export function WorkspaceView() {
         }))
       : clauses;
 
+    const validPerspective: Perspective = (PERSPECTIVES as readonly string[]).includes(role.toLowerCase())
+      ? (role.toLowerCase() as Perspective)
+      : "other";
+
     startAnalysis({
       clauses: clausesToSend,
-      perspective: role as Perspective,
+      perspective: validPerspective,
       docType: docType ?? undefined,
     });
   };
