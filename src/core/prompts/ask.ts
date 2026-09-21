@@ -11,15 +11,26 @@ import type { Clause } from "../domain/schemas";
 export const ASK_PROMPT_VERSION = "2026-09-20.1";
 
 export const askOutputSchema = z.object({
-  text: z.string().min(1),
+  text: z.string().optional().describe("The answer text"),
+  answer: z.string().optional().describe("Fallback for text"),
   basis: z.enum(ANSWER_BASES),
   citations: z.array(citationSchema).default([]),
   followUpQuestions: z.array(z.string()).max(3).default([]),
   escalationTrigger: z.string().optional(),
   nearestClauses: z.array(clauseIdSchema).optional(),
-});
+}).transform((val) => ({
+  ...val,
+  text: val.text || val.answer || "No text provided.",
+}));
 
-export type AskOutput = z.infer<typeof askOutputSchema>;
+export type AskOutput = {
+  text: string;
+  basis: "document" | "general_information" | "not_found";
+  citations: any[];
+  followUpQuestions: string[];
+  escalationTrigger?: string;
+  nearestClauses?: string[];
+};
 
 export interface AskPromptParams {
   question: string;

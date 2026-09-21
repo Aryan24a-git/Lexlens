@@ -9,6 +9,7 @@
 
 import Groq from "groq-sdk";
 import type { ZodTypeAny, z } from "zod";
+import { zodToJsonSchema } from "zod-to-json-schema";
 import type {
   LLMProvider,
   GenerateObjectOptions,
@@ -45,8 +46,9 @@ export class GroqProvider implements LLMProvider {
   ): Promise<z.infer<S>> {
     const { model, system, user, schema, temperature = 0.1, signal } = options;
 
-    // Build a brief schema description for the JSON mode instruction
-    const schemaDesc = JSON.stringify(schema.description ?? "see instructions");
+    // Build a complete JSON schema for the model
+    const jsonSchema = zodToJsonSchema(schema as any, "Output");
+    const schemaDesc = JSON.stringify(jsonSchema);
 
     const systemWithJson = system + jsonModeInstruction(schemaDesc);
 
@@ -64,10 +66,13 @@ export class GroqProvider implements LLMProvider {
         { signal }
       );
 
-      const content = response.choices[0]?.message?.content;
+      let content = response.choices[0]?.message?.content;
       if (!content) {
         throw makeError("LLM_SCHEMA_INVALID", "Model returned empty content.", false);
       }
+
+      // Strip markdown code blocks if the model outputs them despite json_object format
+      content = content.replace(/^```json\s*/i, "").replace(/^```\s*/, "").replace(/\s*```$/, "").trim();
 
       let parsed: unknown;
       try {

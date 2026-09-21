@@ -44,14 +44,35 @@ export async function withRetry<T>(
       const code = extractCode(e);
       if (code !== null && !retryableCodes.has(code)) break;
 
-      // Full jitter backoff: random between 0 and min(maxDelay, base * 2^attempt)
-      const cap = Math.min(maxDelayMs, baseDelayMs * 2 ** attempt);
-      const delay = Math.random() * cap;
-      await sleep(delay);
+      // Extract retry-after if available on 429
+      const retryAfterMs = extractRetryAfter(e);
+      if (retryAfterMs !== null) {
+        await sleep(retryAfterMs + 1000);
+      } else {
+        // Full jitter backoff: random between 0 and min(maxDelay, base * 2^attempt)
+        const cap = Math.min(maxDelayMs, baseDelayMs * 2 ** attempt);
+        const delay = Math.random() * cap;
+        await sleep(delay);
+      }
     }
   }
 
   throw wrapError(lastError);
+}
+
+function extractRetryAfter(e: unknown): number | null {
+  if (typeof e === "object" && e !== null) {
+    const obj = e as Record<string, unknown>;
+    const headers = obj["headers"] as { get?: (name: string) => string | null } | undefined;
+    if (headers && typeof headers.get === "function") {
+      const header = headers.get("retry-after");
+      if (header) {
+        const secs = parseFloat(header);
+        if (!isNaN(secs)) return secs * 1000;
+      }
+    }
+  }
+  return null;
 }
 
 function extractCode(e: unknown): number | string | null {

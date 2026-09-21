@@ -17,9 +17,14 @@ import {
 export const ACTIONS_PROMPT_VERSION = "2026-09-20.1";
 
 export const checklistActionOutputSchema = z.object({
-  items: z.array(checklistItemSchema),
-});
-export type ChecklistActionOutput = z.infer<typeof checklistActionOutputSchema>;
+  items: z.array(checklistItemSchema).optional(),
+  checklist: z.array(checklistItemSchema).optional(),
+}).transform((val) => ({
+  items: val.items || val.checklist || [],
+}));
+export type ChecklistActionOutput = {
+  items: z.infer<typeof checklistItemSchema>[];
+};
 
 export const lawyerBriefActionOutputSchema = lawyerBriefSchema;
 

@@ -227,10 +227,29 @@ export type ComparisonPair = z.infer<typeof comparisonPairSchema>;
 
 export const checklistItemSchema = z.object({
   item: z.string().min(1),
-  owner: z.enum(["you", "other_party", "both"]),
-  due: z.string().optional(),
-  citation: citationSchema.optional(),
-  priority: z.enum(["high", "medium", "low"]),
+  owner: z.union([z.enum(["you", "other_party", "both"]), z.string()]).transform((val) => {
+    if (val === "you" || val === "other_party" || val === "both") return val;
+    return "you";
+  }),
+  due: z.string().optional().default(""),
+  citation: z.union([
+    citationSchema,
+    z.string().transform((str) => {
+      const match = str.match(/^(C\d+)(?::\s*|\s+)?(?:"(.*)"|(.*))?$/);
+      if (match) {
+        return {
+          clauseId: match[1] ?? "C1",
+          quote: (match[2] ?? match[3] ?? str).slice(0, 100),
+          verified: false,
+        };
+      }
+      return { clauseId: "C1", quote: str.slice(0, 100), verified: false };
+    }),
+  ]).optional(),
+  priority: z.union([z.enum(["high", "medium", "low"]), z.string()]).transform((val) => {
+    if (val === "high" || val === "medium" || val === "low") return val;
+    return "medium";
+  }),
 });
 export type ChecklistItem = z.infer<typeof checklistItemSchema>;
 
