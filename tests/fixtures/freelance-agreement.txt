@@ -1,0 +1,31 @@
+FREELANCE SERVICES AGREEMENT
+
+1. SERVICES AND DELIVERABLES
+Contractor agrees to perform the software development, UI design, and technical consulting services described in Statement of Work #1 ("Deliverables"). Contractor shall complete all Deliverables in a timely and workmanlike manner in accordance with the specifications provided by Client.
+
+2. COMPENSATION AND PAYMENT TERMS
+Client shall compensate Contractor at the fixed fee rate of $8,500.00 USD. Contractor shall invoice Client upon final milestone delivery. Client shall pay all approved invoices on Net 60 payment terms. No interest or late payment penalty shall accrue on delayed client disbursements.
+
+3. REVISIONS AND ACCEPTANCE
+Contractor agrees to make all requested modifications, redesigns, and revisions to the Deliverables without additional compensation, regardless of the number of revision rounds, until Client indicates full subjective satisfaction in writing.
+
+4. INTELLECTUAL PROPERTY AND WORK FOR HIRE
+All Deliverables, inventions, source code, designs, and work product created by Contractor under this Agreement shall constitute "work made for hire" owned exclusively by Client from inception. To the extent any rights do not qualify as work made for hire, Contractor hereby irrevocably assigns to Client all worldwide copyright, trademark, patent, trade secret, and moral rights therein.
+
+5. CONFIDENTIALITY
+Contractor shall hold in strict confidence all proprietary technical, financial, and business information disclosed by Client. Contractor shall not disclose or use any Confidential Information except as necessary to perform Services under this Agreement. This obligation survives termination indefinitely.
+
+6. TERM AND TERMINATION
+This Agreement commences on the Effective Date and continues until completion of Deliverables. Client may terminate this Agreement at any time for convenience upon twenty-four (24) hours written notice. Contractor may not terminate this Agreement prior to satisfactory completion of all agreed Deliverables.
+
+7. NON-SOLICITATION
+During the term of this Agreement and for a period of twenty-four (24) months following termination, Contractor shall not directly or indirectly solicit, recruit, hire, or engage any employee, contractor, customer, or vendor of Client, nor induce any counterparty to terminate their relationship with Client.
+
+8. INDEPENDENT CONTRACTOR STATUS
+Contractor is an independent contractor, not an employee or agent of Client. Contractor is solely responsible for all federal, state, and local income taxes, self-employment taxes, and worker compensation insurance.
+
+9. LIMITATION OF LIABILITY AND INDEMNITY
+Contractor agrees to indemnify and defend Client against all third-party claims arising from Contractor's work. Client's aggregate liability under this Agreement shall not exceed the total fees actually paid to Contractor. Contractor's liability shall not be limited.
+
+10. GOVERNING LAW
+This Agreement shall be governed by and construed under the laws of the State of New York, without giving effect to conflicts of law principles.

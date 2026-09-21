@@ -1,0 +1,167 @@
+/* ==========================================================================
+   LexLens design tokens — "Chambers & Paper"
+   Authoritative source for colour, type, space, radius, elevation, motion.
+   Import once in src/app/globals.css. Do not hard-code these values elsewhere.
+   ========================================================================== */
+
+:root {
+  /* --- Baize / verde marble (shell) --- */
+  --baize-950: #08201d;
+  --baize-900: #0f2b27;
+  --baize-800: #17403a;
+  --baize-700: #21574e;
+
+  /* --- Brass (structure, focus, brand) --- */
+  --brass-300: #dcc58c;
+  --brass-500: #bf9b52;
+  --brass-700: #8c6f35;
+
+  /* --- Vellum (paper) --- */
+  --vellum-100: #f2efe6;
+  --vellum-200: #e6e1d3;
+  --vellum-300: #d3ccb9;
+
+  /* --- Ink (text on paper) --- */
+  --ink-900: #16211f;
+  --ink-700: #33423f;
+  --ink-500: #5b6b67;
+
+  /* --- Text on dark --- */
+  --text-on-dark: #ede9dc;
+  --text-on-dark-2: #b8c2bc;
+
+  /* --- Risk (always pair with icon + label) --- */
+  --risk-high: #a8323a;          /* oxblood */
+  --risk-medium: #e9b824;        /* highlighter — use ink text on it */
+  --risk-low: #2f8f74;           /* verdigris fill */
+  --risk-low-text: #1f6f58;      /* verdigris text on paper */
+  --risk-info: #5e7480;          /* slate */
+
+  /* --- Redline (compare) --- */
+  --redline-insert: #1e5aa8;
+  --redline-delete: #b3262e;
+
+  /* --- Focus --- */
+  --focus-ring-dark: #dcc58c;
+  --focus-ring-paper: #1e5aa8;
+
+  /* --- Semantic aliases (default = shell / dark context) --- */
+  --surface: var(--baize-900);
+  --surface-raised: var(--baize-800);
+  --surface-border: var(--baize-700);
+  --text: var(--text-on-dark);
+  --text-2: var(--text-on-dark-2);
+  --focus-ring: var(--focus-ring-dark);
+  --accent: var(--brass-500);
+  --accent-hover: var(--brass-300);
+
+  /* --- Typography --- */
+  --font-display: "Literata", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-ui: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.625rem;
+  --fs-2xl: 2.25rem;
+  --fs-display: clamp(2.75rem, 6vw, 5rem);
+
+  --lh-ui: 1.5;
+  --lh-doc: 1.7;
+  --lh-display: 1.04;
+  --measure-doc: 66ch;
+
+  /* --- Space (4pt) --- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 32px; --sp-7: 48px; --sp-8: 72px; --sp-9: 112px;
+
+  /* --- Radius (by role) --- */
+  --radius-paper: 2px;
+  --radius-tab: 0 3px 3px 0;   /* flush against the sheet's right edge, rounded outer corners */
+  --radius-control: 8px;
+  --radius-chip: 999px;
+  --radius-dialog: 12px;
+
+  /* --- Elevation --- */
+  --shadow-paper:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 2px 4px rgba(4, 18, 15, 0.28),
+    0 14px 32px -8px rgba(4, 18, 15, 0.55),
+    0 40px 80px -24px rgba(4, 18, 15, 0.6);
+  --hairline-brass: 1px solid color-mix(in srgb, var(--brass-500) 55%, transparent);
+
+  /* --- Motion --- */
+  --dur-micro: 120ms;
+  --dur-std: 220ms;
+  --dur-emph: 420ms;
+  --dur-hero: 900ms;
+  --ease-settle: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-std: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-stamp: cubic-bezier(0.3, 1.6, 0.5, 1);
+
+  /* --- Layers --- */
+  --z-base: 0; --z-sheet: 10; --z-tabs: 20; --z-overlay: 40; --z-toast: 60;
+}
+
+/* Paper context: apply to the PaperSheet and any light surface */
+.theme-paper {
+  --surface: var(--vellum-100);
+  --surface-raised: var(--vellum-200);
+  --surface-border: var(--vellum-300);
+  --text: var(--ink-900);
+  --text-2: var(--ink-700);
+  --focus-ring: var(--focus-ring-paper);
+  --accent: var(--brass-700);
+  --accent-hover: var(--brass-500);
+  color: var(--text);
+  background-color: var(--surface);
+}
+
+/* Paper tooth (subtle grain) — uses public/svg/noise.svg */
+.paper-tooth { position: relative; isolation: isolate; }
+.paper-tooth::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/svg/noise.svg") 0 0 / 200px 200px;
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Global focus style */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Tabular stamps: clause ids and page refs (sentence case, no all-caps) */
+.stamp {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Redline conventions */
+ins.redline { color: var(--redline-insert); text-decoration: underline double; text-underline-offset: 3px; background: none; }
+del.redline { color: var(--redline-delete); text-decoration: line-through; }
+
+/* Reduced motion: collapse durations globally (shaders handled in ShaderCanvas) */
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-micro: 0.01ms; --dur-std: 0.01ms; --dur-emph: 0.01ms; --dur-hero: 0.01ms; }
+  * { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* Print: Lawyer Brief */
+@media print {
+  :root { --surface: #fff; --text: #000; }
+  body { background: #fff !important; }
+  .no-print, [data-shell], nav, canvas { display: none !important; }
+  .print-page { box-shadow: none !important; border: 0 !important; }
+  @page { margin: 18mm 16mm; }
+}

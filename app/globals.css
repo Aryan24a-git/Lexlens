@@ -1,26 +1,95 @@
+/* Google Fonts must be first */
+@import url("https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&family=Public+Sans:wght@400;500;600&display=swap");
+
+@import "../src/styles/tokens.css";
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ===== Base resets ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-ui);
+  font-size: var(--fs-md);
+  line-height: var(--lh-ui);
+  background-color: var(--baize-900);
+  color: var(--text-on-dark);
+  margin: 0;
+  padding: 0;
+  min-height: 100dvh;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--brass-500) 30%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-ui {
+  font-family: var(--font-ui);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: var(--lh-display);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ===== Tailwind v4 theme mapping ===== */
+@theme {
+  --color-baize-950: var(--baize-950);
+  --color-baize-900: var(--baize-900);
+  --color-baize-800: var(--baize-800);
+  --color-baize-700: var(--baize-700);
+
+  --color-brass-300: var(--brass-300);
+  --color-brass-500: var(--brass-500);
+  --color-brass-700: var(--brass-700);
+
+  --color-vellum-100: var(--vellum-100);
+  --color-vellum-200: var(--vellum-200);
+  --color-vellum-300: var(--vellum-300);
+
+  --color-ink-900: var(--ink-900);
+  --color-ink-700: var(--ink-700);
+  --color-ink-500: var(--ink-500);
+
+  --color-risk-high: var(--risk-high);
+  --color-risk-medium: var(--risk-medium);
+  --color-risk-low: var(--risk-low);
+  --color-risk-info: var(--risk-info);
+
+  --color-redline-insert: var(--redline-insert);
+  --color-redline-delete: var(--redline-delete);
+
+  --font-family-display: var(--font-display);
+  --font-family-ui: var(--font-ui);
+
+  --shadow-paper: var(--shadow-paper);
+
+  --ease-settle: var(--ease-settle);
+  --ease-stamp: var(--ease-stamp);
+  --ease-std: var(--ease-std);
 }

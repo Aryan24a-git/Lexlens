@@ -1,0 +1,118 @@
+{
+  "fileName": "lease-v2.txt",
+  "clauseCount": 14,
+  "clauses": [
+    {
+      "id": "C1",
+      "index": 1,
+      "heading": "1. PREMISES",
+      "startOffset": 0,
+      "endOffset": 269,
+      "text": "RESIDENTIAL LEASE AGREEMENT (V2)\n\n1. PREMISES\nLandlord hereby leases to Tenant, and Tenant hereby leases from Landlord, the residential dwelling located at 742 Evergreen Terrace, Apartment 4B, Springfield (\"Premises\"), for use solely as a private residential residence."
+    },
+    {
+      "id": "C2",
+      "index": 2,
+      "heading": "2. TERM",
+      "startOffset": 271,
+      "endOffset": 393,
+      "text": "2. TERM\nThe term of this Lease shall commence on October 1, 2026 and continue through September 30, 2027 (\"Initial Term\")."
+    },
+    {
+      "id": "C3",
+      "index": 3,
+      "heading": "3. RENT & PAYMENTS",
+      "startOffset": 395,
+      "endOffset": 698,
+      "text": "3. RENT & PAYMENTS\nTenant agrees to pay Landlord monthly rent in the amount of $2,450.00 USD, due on the first (1st) day of each calendar month. A grace period of two (2) business days is permitted. If rent is not received by the second (2nd) business day, Tenant shall pay a late charge of $125.00 USD."
+    },
+    {
+      "id": "C4",
+      "index": 4,
+      "heading": "4. SECURITY DEPOSIT & DEDUCTIONS",
+      "startOffset": 700,
+      "endOffset": 1063,
+      "text": "4. SECURITY DEPOSIT & DEDUCTIONS\nUpon execution of this Lease, Tenant shall deposit with Landlord the sum of $2,450.00 USD as a security deposit. Within forty-five (45) days after Tenant vacates the Premises, Landlord shall return the deposit minus any deductions for unpaid rent, physical damages, and a mandatory non-refundable deep cleaning fee of $350.00 USD."
+    },
+    {
+      "id": "C5",
+      "index": 5,
+      "heading": "5. USE OF PREMISES",
+      "startOffset": 1065,
+      "endOffset": 1264,
+      "text": "5. USE OF PREMISES\nThe Premises shall be occupied exclusively by Tenant and named occupants. Tenant shall not disturb neighbors, commit waste, or conduct unlawful activities on or about the Premises."
+    },
+    {
+      "id": "C6",
+      "index": 6,
+      "heading": "6. MAINTENANCE AND REPAIRS",
+      "startOffset": 1266,
+      "endOffset": 1572,
+      "text": "6. MAINTENANCE AND REPAIRS\nLandlord shall maintain all plumbing, heating, electrical, and structural components of the Premises in good working order. Tenant shall promptly notify Landlord in writing of any defects or needed repairs. Tenant is responsible for basic cleanliness and minor bulb replacements."
+    },
+    {
+      "id": "C7",
+      "index": 7,
+      "heading": "7. LANDLORD ENTRY AND ACCESS",
+      "startOffset": 1574,
+      "endOffset": 1861,
+      "text": "7. LANDLORD ENTRY AND ACCESS\nLandlord and Landlord's authorized agents may enter the Premises at any time with at least twelve (12) hours prior notice for inspections, maintenance, appraisal, or viewing. Landlord may enter without prior notice in any situation deemed urgent by Landlord."
+    },
+    {
+      "id": "C8",
+      "index": 8,
+      "heading": "8. ASSIGNMENT AND SUBLETTING",
+      "startOffset": 1863,
+      "endOffset": 2176,
+      "text": "8. ASSIGNMENT AND SUBLETTING\nTenant is strictly prohibited from assigning, transferring, or subletting any portion of the Premises, or listing the Premises on home-sharing or lodging platforms, under any circumstances. Any attempted assignment or sublease is void and constitutes an immediate non-curable default."
+    },
+    {
+      "id": "C9",
+      "index": 9,
+      "heading": "9. UTILITIES AND SERVICES",
+      "startOffset": 2178,
+      "endOffset": 2371,
+      "text": "9. UTILITIES AND SERVICES\nLandlord shall pay for municipal water, sewer, and trash collection. Tenant shall contract and pay directly for electricity, natural gas, internet, and cable services."
+    },
+    {
+      "id": "C10",
+      "index": 10,
+      "heading": "10. DEFAULT AND REMEDIES",
+      "startOffset": 2373,
+      "endOffset": 2695,
+      "text": "10. DEFAULT AND REMEDIES\nIf Tenant fails to pay rent when due or breaches any material term of this Lease, Landlord may deliver a written notice to cure within seven (7) days. If Tenant fails to cure, Landlord may pursue lawful remedies, including termination of tenancy in accordance with applicable statutory procedures."
+    },
+    {
+      "id": "C11",
+      "index": 11,
+      "heading": "11. RENEWAL AND TERMINATION",
+      "startOffset": 2697,
+      "endOffset": 3015,
+      "text": "11. RENEWAL AND TERMINATION\nUpon expiration of the Initial Term, this Lease shall automatically renew for a full subsequent twelve (12) month term at an increased rent determined by Landlord, unless Tenant serves written notice of termination by registered certified mail at least ninety (90) days prior to expiration."
+    },
+    {
+      "id": "C12",
+      "index": 12,
+      "heading": "12. INDEMNIFICATION",
+      "startOffset": 3017,
+      "endOffset": 3251,
+      "text": "12. INDEMNIFICATION\nTenant agrees to indemnify and hold harmless Landlord from any claims, damages, or liabilities arising from the willful or negligent acts or omissions of Tenant, Tenant's family, or Tenant's guests on the Premises."
+    },
+    {
+      "id": "C13",
+      "index": 13,
+      "heading": "13. GOVERNING LAW",
+      "startOffset": 3253,
+      "endOffset": 3427,
+      "text": "13. GOVERNING LAW\nThis Agreement shall be governed by, and construed in accordance with, the laws of the State of Illinois, without regard to its conflict of laws principles."
+    },
+    {
+      "id": "C14",
+      "index": 14,
+      "heading": "14. ENTIRE AGREEMENT",
+      "startOffset": 3429,
+      "endOffset": 3673,
+      "text": "14. ENTIRE AGREEMENT\nThis document constitutes the entire agreement between the parties with respect to the subject matter hereof and supersedes all prior agreements, oral or written. Any amendment must be in writing and signed by both parties."
+    }
+  ]
+}

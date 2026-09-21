@@ -1,3 +1,17 @@
+# Agent instructions
+
+Before doing anything: read docs/memory.md, docs/rules.md, docs/instruction.md.
+Build LexLens exactly as specified in docs/*. Never violate docs/rules.md.
+After every task: run `npm run lint && npm run typecheck && npm run test`, then update docs/memory.md.
+Ask the human when blocked or when a decision changes scope, security, legal wording or dependencies.
+
+## Quick reference
+- Stack: Next.js App Router · TypeScript strict · Tailwind · Zod · Groq SDK (LLaMA 3)
+- LLM adapter: src/server/llm/ — always use LLMProvider interface, never import groq-sdk directly in features/ui
+- Privacy invariant: NO document text in server logs, server DB, or analytics — ever
+- All colours/type/space from src/styles/tokens.css via Tailwind theme — no raw hex in components
+- Shaders via ShaderCanvas only (src/ui/shaders/ShaderCanvas.tsx)
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

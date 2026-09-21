@@ -1,0 +1,22 @@
+CLOUDSERVICE TERMS OF SERVICE
+
+1. ACCEPTANCE OF TERMS
+By creating an account, accessing, or using the CloudService platform ("Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree, you must immediately discontinue all use of the Service.
+
+2. UNILATERAL MODIFICATIONS
+CloudService reserves the right to amend, update, or replace these Terms at any time without prior individual notice. Your continued use of the Service following any published changes constitutes unconditional acceptance of the revised Terms.
+
+3. USER CONTENT AND LICENCE GRANT
+You retain ownership of documents and files uploaded to the Service. However, by uploading content, you grant CloudService a perpetual, worldwide, irrevocable, royalty-free, transferable licence to host, store, analyze, reproduce, and create derivative works from your content to train internal machine learning models and improve our platform.
+
+4. SERVICE AVAILABILITY AND AS-IS DISCLAIMER
+The Service is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, whether express, statutory, or implied, including warranties of merchantability, fitness for a particular purpose, or non-infringement. We do not guarantee uninterrupted or error-free operation.
+
+5. LIMITATION OF LIABILITY
+To the maximum extent permitted by applicable law, CloudService's total cumulative liability for any and all claims arising under or related to these Terms shall be strictly capped at fifty dollars ($50.00 USD) or the total fees paid by you in the preceding month, whichever is less.
+
+6. MANDATORY BINDING ARBITRATION AND CLASS ACTION WAIVER
+You agree that any dispute, claim, or controversy arising out of or relating to these Terms shall be resolved exclusively through confidential binding individual arbitration administered by the American Arbitration Association. YOU EXPRESSLY WAIVE ANY RIGHT TO COMMENCE OR PARTICIPATE IN ANY CLASS ACTION, COLLECTIVE ACTION, OR REPRESENTATIVE PROCEEDING AGAINST CLOUDSERVICE.
+
+7. TERMINATION
+We may suspend or permanently terminate your access to the Service at our sole discretion, without prior notice or liability, for any reason whatsoever, including breach of these Terms.

@@ -1,0 +1,62 @@
+{
+  "fileName": "employment-offer.txt",
+  "clauseCount": 7,
+  "clauses": [
+    {
+      "id": "C1",
+      "index": 1,
+      "heading": "1. POSITION AND COMMENCEMENT",
+      "startOffset": 0,
+      "endOffset": 227,
+      "text": "EMPLOYMENT OFFER LETTER\n\n1. POSITION AND COMMENCEMENT\nApex Dynamics Inc. (\"Company\") is pleased to offer you the full-time position of Senior Systems Engineer, reporting to the VP of Engineering, commencing on November 1, 2026."
+    },
+    {
+      "id": "C2",
+      "index": 2,
+      "heading": "2. COMPENSATION AND BONUS DISCRETION",
+      "startOffset": 229,
+      "endOffset": 556,
+      "text": "2. COMPENSATION AND BONUS DISCRETION\nYour starting base salary will be $155,000.00 USD per annum, paid semi-monthly. You may be eligible for an annual performance bonus of up to 15% of your base salary. The award, timing, and amount of any bonus remain solely and strictly at the discretion of the Company's Board of Directors."
+    },
+    {
+      "id": "C3",
+      "index": 3,
+      "heading": "3. PROBATIONARY PERIOD",
+      "startOffset": 558,
+      "endOffset": 796,
+      "text": "3. PROBATIONARY PERIOD\nYour employment is subject to an initial probationary period of six (6) months. During probation, either party may terminate the employment relationship for any reason upon one (1) business day prior written notice."
+    },
+    {
+      "id": "C4",
+      "index": 4,
+      "heading": "4. TERMINATION AND NOTICE PERIOD",
+      "startOffset": 798,
+      "endOffset": 1108,
+      "text": "4. TERMINATION AND NOTICE PERIOD\nFollowing completion of the probationary period, you must provide the Company with at least three (3) months prior written notice in the event of your resignation. The Company may terminate your employment without cause upon two (2) weeks written notice or pay in lieu thereof."
+    },
+    {
+      "id": "C5",
+      "index": 5,
+      "heading": "5. RESTRICTIVE COVENANTS AND NON-COMPETE",
+      "startOffset": 1110,
+      "endOffset": 1489,
+      "text": "5. RESTRICTIVE COVENANTS AND NON-COMPETE\nDuring your employment and for a period of twelve (12) months following termination of employment for any reason, you shall not, directly or indirectly, perform engineering or technical advisory services for any business entity that competes with the Company's core software products within a fifty (50) mile radius of any Company office."
+    },
+    {
+      "id": "C6",
+      "index": 6,
+      "heading": "6. PROPRIETARY INFORMATION AND INVENTIONS",
+      "startOffset": 1491,
+      "endOffset": 1790,
+      "text": "6. PROPRIETARY INFORMATION AND INVENTIONS\nYou agree that all inventions, technical improvements, designs, and software code conceived or reduced to practice during your employment, whether during business hours or utilizing Company equipment, shall be the sole and exclusive property of the Company."
+    },
+    {
+      "id": "C7",
+      "index": 7,
+      "heading": "7. AT-WILL EMPLOYMENT",
+      "startOffset": 1792,
+      "endOffset": 2014,
+      "text": "7. AT-WILL EMPLOYMENT\nSubject to statutory protections and the terms of this letter, employment with the Company is at-will, meaning either party may terminate the employment relationship in accordance with applicable law."
+    }
+  ]
+}

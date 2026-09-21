@@ -1,0 +1,62 @@
+{
+  "fileName": "nda.txt",
+  "clauseCount": 7,
+  "clauses": [
+    {
+      "id": "C1",
+      "index": 1,
+      "heading": "1. PURPOSE",
+      "startOffset": 0,
+      "endOffset": 234,
+      "text": "MUTUAL NON-DISCLOSURE AGREEMENT\n\n1. PURPOSE\nThe parties wish to explore a potential strategic business collaboration (\"Purpose\") and in connection therewith may disclose certain confidential and proprietary information to one another."
+    },
+    {
+      "id": "C2",
+      "index": 2,
+      "heading": "2. DEFINITION OF CONFIDENTIAL INFORMATION",
+      "startOffset": 236,
+      "endOffset": 624,
+      "text": "2. DEFINITION OF CONFIDENTIAL INFORMATION\n\"Confidential Information\" means all non-public technical, business, financial, product, or customer data disclosed by one party (\"Disclosing Party\") to the other party (\"Receiving Party\"), whether orally or in writing, that is marked as confidential or that reasonably should be understood to be confidential given the nature of the information."
+    },
+    {
+      "id": "C3",
+      "index": 3,
+      "heading": "3. EXCLUSIONS FROM CONFIDENTIALITY",
+      "startOffset": 626,
+      "endOffset": 1015,
+      "text": "3. EXCLUSIONS FROM CONFIDENTIALITY\nConfidential Information does not include information that: (a) is or becomes publicly known without breach of this Agreement; (b) was already known to Receiving Party prior to disclosure; (c) is independently developed without reference to Disclosing Party's information; or (d) is rightfully received from a third party without duty of confidentiality."
+    },
+    {
+      "id": "C4",
+      "index": 4,
+      "heading": "4. OBLIGATIONS OF RECEIVING PARTY",
+      "startOffset": 1017,
+      "endOffset": 1510,
+      "text": "4. OBLIGATIONS OF RECEIVING PARTY\nReceiving Party shall protect Disclosing Party's Confidential Information with at least the same degree of care it uses to protect its own confidential information of like nature, but no less than reasonable care. Receiving Party shall not disclose Confidential Information to any third party except to its officers, directors, and legal advisors with a strict need to know who are bound by confidentiality obligations at least as restrictive as those herein."
+    },
+    {
+      "id": "C5",
+      "index": 5,
+      "heading": "5. RETURN OR DESTRUCTION OF MATERIALS",
+      "startOffset": 1512,
+      "endOffset": 1798,
+      "text": "5. RETURN OR DESTRUCTION OF MATERIALS\nUpon written request by Disclosing Party or termination of this Agreement, Receiving Party shall promptly return or certify the permanent destruction of all copies of Confidential Information, retaining only one copy for legal compliance archiving."
+    },
+    {
+      "id": "C6",
+      "index": 6,
+      "heading": "6. TERM AND SURVIVAL",
+      "startOffset": 1800,
+      "endOffset": 2049,
+      "text": "6. TERM AND SURVIVAL\nThis Agreement shall govern disclosures made during a period of one (1) year from the Effective Date. The obligations of confidentiality and non-use shall survive for a period of three (3) years following the date of disclosure."
+    },
+    {
+      "id": "C7",
+      "index": 7,
+      "heading": "7. REMEDIES AND INJUNCTIVE RELIEF",
+      "startOffset": 2051,
+      "endOffset": 2415,
+      "text": "7. REMEDIES AND INJUNCTIVE RELIEF\nEach party acknowledges that any unauthorized disclosure or use of Confidential Information would cause irreparable harm for which monetary damages alone would be inadequate. Accordingly, Disclosing Party shall be entitled to seek equitable relief, including temporary and permanent injunctions, without necessity of posting bond."
+    }
+  ]
+}

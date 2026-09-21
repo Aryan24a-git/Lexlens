@@ -1,0 +1,208 @@
+{
+  "docType": "lease_residential",
+  "analyses": [
+    {
+      "clauseId": "C1",
+      "canonicalType": "definitions",
+      "plainSummary": "Identifies the leased property as Apartment 4B at 742 Evergreen Terrace, Springfield, restricted solely for private residential use.",
+      "obligations": ["Use the premises exclusively for residential living"],
+      "rights": ["Occupancy of Apartment 4B during lease term"],
+      "risk": {
+        "level": "info",
+        "reasons": ["Standard premise description with standard single-family residential restriction"],
+        "favors": "balanced",
+        "unusual": false
+      },
+      "whyItMatters": "You cannot run a commercial business or sublet desks to outside entities from this address.",
+      "questionsToAsk": ["Are home-office remote working arrangements permitted?"],
+      "confidence": 1.0,
+      "citations": [
+        {
+          "clauseId": "C1",
+          "quote": "for use solely as a private residential residence.",
+          "claim": "Premises must be used solely as a private residence.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "clauseId": "C2",
+      "canonicalType": "term",
+      "plainSummary": "The lease runs for exactly 12 months, commencing October 1, 2026 and concluding September 30, 2027.",
+      "obligations": ["Commit to lease term until September 30, 2027"],
+      "rights": ["Guaranteed occupancy throughout the 1-year term"],
+      "risk": {
+        "level": "low",
+        "reasons": ["Standard fixed-term annual lease duration"],
+        "favors": "balanced",
+        "unusual": false
+      },
+      "whyItMatters": "Defines your move-in and move-out schedule and duration of rent stability.",
+      "questionsToAsk": ["What renewal options exist after September 30, 2027?"],
+      "confidence": 1.0,
+      "citations": [
+        {
+          "clauseId": "C2",
+          "quote": "commence on October 1, 2026 and continue through September 30, 2027",
+          "claim": "Lease runs from October 1, 2026 through September 30, 2027.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "clauseId": "C3",
+      "canonicalType": "payment",
+      "plainSummary": "Rent is $2,200 monthly due on the 1st day. A 5-day grace period is provided; a $50 late fee applies on day 6.",
+      "obligations": ["Pay $2,200 on or before the 1st of each month", "Pay $50 late charge if past the 5th day"],
+      "rights": ["5-day grace period before late penalties apply"],
+      "risk": {
+        "level": "low",
+        "reasons": ["Grace period of 5 business days is tenant-favourable; late fee of $50 is within market norms"],
+        "favors": "balanced",
+        "unusual": false
+      },
+      "whyItMatters": "Provides a predictable payment schedule and gives 5 business days buffer before fees accrue.",
+      "questionsToAsk": ["What payment methods are accepted without transaction surcharges?"],
+      "confidence": 0.95,
+      "citations": [
+        {
+          "clauseId": "C3",
+          "quote": "monthly rent in the amount of $2,200.00 USD, due on the first (1st) day of each calendar month. A grace period of five (5) business days is permitted.",
+          "claim": "Monthly rent is $2,200 due on the 1st with a 5-day grace period.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "clauseId": "C4",
+      "canonicalType": "payment",
+      "plainSummary": "Requires a $2,200 security deposit refundable within 14 days after moving out, subject to itemized damage deductions.",
+      "obligations": ["Deposit $2,200 at signing"],
+      "rights": ["Full refund within 14 days minus itemized repairs", "Itemized written statement required for deductions"],
+      "risk": {
+        "level": "low",
+        "reasons": ["14-day turnaround is faster than statutory minimums (often 30 days) and protects the tenant"],
+        "favors": "you",
+        "unusual": false
+      },
+      "whyItMatters": "Rapid deposit return deadline protects your cash flow when moving out.",
+      "questionsToAsk": ["Is the deposit held in an interest-bearing escrow account?"],
+      "confidence": 0.95,
+      "citations": [
+        {
+          "clauseId": "C4",
+          "quote": "Within fourteen (14) days after Tenant vacates the Premises, Landlord shall return the deposit",
+          "claim": "Deposit must be returned within 14 days of vacating.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "clauseId": "C7",
+      "canonicalType": "other",
+      "plainSummary": "Landlord may enter during reasonable hours for inspections or showings, requiring at least 48 hours advance written notice.",
+      "obligations": ["Grant access for legitimate inspections or repairs after notice"],
+      "rights": ["48 hours advance written notice before any non-emergency entry"],
+      "risk": {
+        "level": "low",
+        "reasons": ["48-hour notice window exceeds the statutory 24-hour baseline, strongly protecting tenant privacy"],
+        "favors": "you",
+        "unusual": false
+      },
+      "whyItMatters": "Ensures landlord cannot show up unannounced or disturb your quiet enjoyment.",
+      "questionsToAsk": ["How is written notice delivered (email or posted notice)?"],
+      "confidence": 1.0,
+      "citations": [
+        {
+          "clauseId": "C7",
+          "quote": "Landlord shall provide Tenant with at least forty-eight (48) hours prior written notice",
+          "claim": "48 hours prior written notice is mandatory for entry.",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "clauseId": "C10",
+      "canonicalType": "termination",
+      "plainSummary": "Either party may terminate the lease early with 60 days written notice, subject to a reasonable 1-month early termination fee.",
+      "obligations": ["Give 60 days advance written notice", "Pay one month rent early termination fee"],
+      "rights": ["Right to terminate before 12-month expiry without paying the entire remaining lease value"],
+      "risk": {
+        "level": "medium",
+        "reasons": ["Allows exit without accelerating the entire lease liability, though 60 days notice is required"],
+        "favors": "balanced",
+        "unusual": false
+      },
+      "whyItMatters": "Provides a clean exit mechanism if you need to relocate for work or personal reasons.",
+      "questionsToAsk": ["Can the early termination fee be waived if a qualified replacement tenant is found?"],
+      "confidence": 0.95,
+      "citations": [
+        {
+          "clauseId": "C10",
+          "quote": "early termination fee equal to one (1) month rent upon sixty (60) days notice",
+          "claim": "Early termination requires 60 days notice and 1 month rent fee.",
+          "verified": true
+        }
+      ]
+    }
+  ],
+  "synthesis": {
+    "docType": "lease_residential",
+    "parties": ["Landlord", "Tenant"],
+    "tldr": "Standard 1-year residential apartment lease with $2,200 monthly rent. Strongly tenant-friendly terms including 48-hour landlord entry notice, 14-day security deposit return, and a 5-day grace period on rent. Early departure permitted on 60 days notice with a 1-month fee.",
+    "keyFacts": [
+      {
+        "label": "Monthly Rent",
+        "value": "$2,200.00 / month (due 1st)",
+        "citations": [
+          {
+            "clauseId": "C3",
+            "quote": "monthly rent in the amount of $2,200.00 USD",
+            "claim": "Monthly rent is $2,200.",
+            "verified": true
+          }
+        ]
+      },
+      {
+        "label": "Security Deposit",
+        "value": "$2,200.00 (Refundable in 14 days)",
+        "citations": [
+          {
+            "clauseId": "C4",
+            "quote": "Within fourteen (14) days after Tenant vacates the Premises",
+            "claim": "Refundable within 14 days.",
+            "verified": true
+          }
+        ]
+      },
+      {
+        "label": "Entry Notice",
+        "value": "48 hours advance written notice",
+        "citations": [
+          {
+            "clauseId": "C7",
+            "quote": "at least forty-eight (48) hours prior written notice",
+            "claim": "48 hours notice required.",
+            "verified": true
+          }
+        ]
+      }
+    ],
+    "topRisks": [
+      {
+        "clauseId": "C10",
+        "headline": "Early termination fee equal to 1 month rent with 60-day notice requirement",
+        "level": "medium"
+      },
+      {
+        "clauseId": "C3",
+        "headline": "Late payment penalty of $50 if not received by 5th business day",
+        "level": "low"
+      }
+    ],
+    "missingClauses": ["Mold and lead paint disclosure statement", "Pet deposit & policy addendum"],
+    "inconsistencies": [],
+    "perspective": "tenant",
+    "promptVersion": "v1.0"
+  }
+}

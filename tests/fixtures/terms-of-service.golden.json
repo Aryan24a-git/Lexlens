@@ -1,0 +1,62 @@
+{
+  "fileName": "terms-of-service.txt",
+  "clauseCount": 7,
+  "clauses": [
+    {
+      "id": "C1",
+      "index": 1,
+      "heading": "1. ACCEPTANCE OF TERMS",
+      "startOffset": 0,
+      "endOffset": 273,
+      "text": "CLOUDSERVICE TERMS OF SERVICE\n\n1. ACCEPTANCE OF TERMS\nBy creating an account, accessing, or using the CloudService platform (\"Service\"), you agree to be bound by these Terms of Service (\"Terms\"). If you do not agree, you must immediately discontinue all use of the Service."
+    },
+    {
+      "id": "C2",
+      "index": 2,
+      "heading": "2. UNILATERAL MODIFICATIONS",
+      "startOffset": 275,
+      "endOffset": 545,
+      "text": "2. UNILATERAL MODIFICATIONS\nCloudService reserves the right to amend, update, or replace these Terms at any time without prior individual notice. Your continued use of the Service following any published changes constitutes unconditional acceptance of the revised Terms."
+    },
+    {
+      "id": "C3",
+      "index": 3,
+      "heading": "3. USER CONTENT AND LICENCE GRANT",
+      "startOffset": 547,
+      "endOffset": 925,
+      "text": "3. USER CONTENT AND LICENCE GRANT\nYou retain ownership of documents and files uploaded to the Service. However, by uploading content, you grant CloudService a perpetual, worldwide, irrevocable, royalty-free, transferable licence to host, store, analyze, reproduce, and create derivative works from your content to train internal machine learning models and improve our platform."
+    },
+    {
+      "id": "C4",
+      "index": 4,
+      "heading": "4. SERVICE AVAILABILITY AND AS-IS DISCLAIMER",
+      "startOffset": 927,
+      "endOffset": 1261,
+      "text": "4. SERVICE AVAILABILITY AND AS-IS DISCLAIMER\nThe Service is provided on an \"AS IS\" and \"AS AVAILABLE\" basis without warranties of any kind, whether express, statutory, or implied, including warranties of merchantability, fitness for a particular purpose, or non-infringement. We do not guarantee uninterrupted or error-free operation."
+    },
+    {
+      "id": "C5",
+      "index": 5,
+      "heading": "5. LIMITATION OF LIABILITY",
+      "startOffset": 1263,
+      "endOffset": 1573,
+      "text": "5. LIMITATION OF LIABILITY\nTo the maximum extent permitted by applicable law, CloudService's total cumulative liability for any and all claims arising under or related to these Terms shall be strictly capped at fifty dollars ($50.00 USD) or the total fees paid by you in the preceding month, whichever is less."
+    },
+    {
+      "id": "C6",
+      "index": 6,
+      "heading": "6. MANDATORY BINDING ARBITRATION AND CLASS ACTION WAIVER",
+      "startOffset": 1575,
+      "endOffset": 2007,
+      "text": "6. MANDATORY BINDING ARBITRATION AND CLASS ACTION WAIVER\nYou agree that any dispute, claim, or controversy arising out of or relating to these Terms shall be resolved exclusively through confidential binding individual arbitration administered by the American Arbitration Association. YOU EXPRESSLY WAIVE ANY RIGHT TO COMMENCE OR PARTICIPATE IN ANY CLASS ACTION, COLLECTIVE ACTION, OR REPRESENTATIVE PROCEEDING AGAINST CLOUDSERVICE."
+    },
+    {
+      "id": "C7",
+      "index": 7,
+      "heading": "7. TERMINATION",
+      "startOffset": 2009,
+      "endOffset": 2209,
+      "text": "7. TERMINATION\nWe may suspend or permanently terminate your access to the Service at our sole discretion, without prior notice or liability, for any reason whatsoever, including breach of these Terms."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+MUTUAL NON-DISCLOSURE AGREEMENT
+
+1. PURPOSE
+The parties wish to explore a potential strategic business collaboration ("Purpose") and in connection therewith may disclose certain confidential and proprietary information to one another.
+
+2. DEFINITION OF CONFIDENTIAL INFORMATION
+"Confidential Information" means all non-public technical, business, financial, product, or customer data disclosed by one party ("Disclosing Party") to the other party ("Receiving Party"), whether orally or in writing, that is marked as confidential or that reasonably should be understood to be confidential given the nature of the information.
+
+3. EXCLUSIONS FROM CONFIDENTIALITY
+Confidential Information does not include information that: (a) is or becomes publicly known without breach of this Agreement; (b) was already known to Receiving Party prior to disclosure; (c) is independently developed without reference to Disclosing Party's information; or (d) is rightfully received from a third party without duty of confidentiality.
+
+4. OBLIGATIONS OF RECEIVING PARTY
+Receiving Party shall protect Disclosing Party's Confidential Information with at least the same degree of care it uses to protect its own confidential information of like nature, but no less than reasonable care. Receiving Party shall not disclose Confidential Information to any third party except to its officers, directors, and legal advisors with a strict need to know who are bound by confidentiality obligations at least as restrictive as those herein.
+
+5. RETURN OR DESTRUCTION OF MATERIALS
+Upon written request by Disclosing Party or termination of this Agreement, Receiving Party shall promptly return or certify the permanent destruction of all copies of Confidential Information, retaining only one copy for legal compliance archiving.
+
+6. TERM AND SURVIVAL
+This Agreement shall govern disclosures made during a period of one (1) year from the Effective Date. The obligations of confidentiality and non-use shall survive for a period of three (3) years following the date of disclosure.
+
+7. REMEDIES AND INJUNCTIVE RELIEF
+Each party acknowledges that any unauthorized disclosure or use of Confidential Information would cause irreparable harm for which monetary damages alone would be inadequate. Accordingly, Disclosing Party shall be entitled to seek equitable relief, including temporary and permanent injunctions, without necessity of posting bond.
