@@ -47,3 +47,9 @@ next-env.d.ts
 .env.local
 .env*.local
 .vercel
+
+# Samples & scripts (local only)
+/sample_documents
+sample_documents/
+scripts/generate-*-pdfs.js
+scripts/generate-script-pdf.js
