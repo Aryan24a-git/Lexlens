@@ -12,9 +12,9 @@ const envSchema = z.object({
       ? z.string().default("mock-groq-api-key-for-tests")
       : z.string().min(1, "GROQ_API_KEY is required"),
       
-  LLM_MODEL_MAIN: z.string().default("llama-3.3-70b-versatile"),
-  LLM_MODEL_FAST: z.string().default("llama-3.1-8b-instant"),
-  LLM_MODEL_DEEP: z.string().default("llama-3.3-70b-versatile"),
+  LLM_MODEL_MAIN: z.string().default("openai/gpt-oss-120b"),
+  LLM_MODEL_FAST: z.string().default("qwen/qwen3.8-27b"),
+  LLM_MODEL_DEEP: z.string().default("openai/gpt-oss-120b"),
 
   // Limits
   MAX_CLAUSES_PER_REQUEST: z.coerce.number().positive().catch(600),
