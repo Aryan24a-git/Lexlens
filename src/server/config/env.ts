@@ -26,9 +26,9 @@ if (!parsed.success) {
 export const env = {
   ...parsed.data,
   // Hardcoded LLM config to prevent Vercel overrides
-  LLM_MODEL_MAIN: "llama3-8b-8192",
-  LLM_MODEL_FAST: "llama3-8b-8192",
-  LLM_MODEL_DEEP: "llama3-8b-8192",
+  LLM_MODEL_MAIN: "llama-3.1-8b-instant",
+  LLM_MODEL_FAST: "llama-3.1-8b-instant",
+  LLM_MODEL_DEEP: "llama-3.1-8b-instant",
   
   // Hardcoded Limits
   MAX_CLAUSES_PER_REQUEST: 600,
