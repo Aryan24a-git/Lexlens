@@ -1,14 +1,21 @@
 /**
  * Rate limiting helper.
- * Uses an in-memory sliding window algorithm (or Upstash Redis if configured).
+ * Uses Upstash Redis if configured, otherwise falls back to an in-memory sliding window algorithm.
  */
 
-interface RateLimitRecord {
-  timestamps: number[];
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
+import { env } from "../config/env";
+
+export interface RateLimitResult {
+  success: boolean;
+  limit: number;
+  remaining: number;
+  reset: number;
 }
 
 class InMemoryRateLimiter {
-  private cache = new Map<string, RateLimitRecord>();
+  private cache = new Map<string, { timestamps: number[] }>();
   private maxRequests: number;
   private windowMs: number;
 
@@ -17,7 +24,7 @@ class InMemoryRateLimiter {
     this.windowMs = windowMs;
   }
 
-  check(key: string): { success: boolean; limit: number; remaining: number; reset: number } {
+  check(key: string): RateLimitResult {
     const now = Date.now();
     const windowStart = now - this.windowMs;
 
@@ -32,7 +39,7 @@ class InMemoryRateLimiter {
 
     if (record.timestamps.length >= this.maxRequests) {
       const oldest = record.timestamps[0] ?? now;
-      const reset = Math.ceil((oldest + this.windowMs - now) / 1000);
+      const reset = Math.ceil((oldest + this.windowMs) / 1000); // Unix timestamp in seconds
       return {
         success: false,
         limit: this.maxRequests,
@@ -47,7 +54,7 @@ class InMemoryRateLimiter {
       success: true,
       limit: this.maxRequests,
       remaining,
-      reset: Math.ceil(this.windowMs / 1000),
+      reset: Math.ceil((now + this.windowMs) / 1000),
     };
   }
 
@@ -65,15 +72,37 @@ class InMemoryRateLimiter {
 }
 
 // Global instance for the process
-const globalLimiter = new InMemoryRateLimiter(60, 60_000); // 60 req/min default
+const globalInMemoryLimiter = new InMemoryRateLimiter(60, 60_000); // 60 req/min default
 
-export function checkRateLimit(key: string): {
-  success: boolean;
-  limit: number;
-  remaining: number;
-  reset: number;
-} {
-  return globalLimiter.check(key);
+let upstashRatelimit: Ratelimit | null = null;
+if (env.UPSTASH_REDIS_REST_URL && env.UPSTASH_REDIS_REST_TOKEN) {
+  upstashRatelimit = new Ratelimit({
+    redis: new Redis({
+      url: env.UPSTASH_REDIS_REST_URL,
+      token: env.UPSTASH_REDIS_REST_TOKEN,
+    }),
+    limiter: Ratelimit.slidingWindow(60, "1 m"),
+    analytics: true,
+  });
+}
+
+export async function checkRateLimit(key: string): Promise<RateLimitResult> {
+  if (upstashRatelimit) {
+    try {
+      const res = await upstashRatelimit.limit(key);
+      return {
+        success: res.success,
+        limit: res.limit,
+        remaining: res.remaining,
+        reset: Math.ceil(res.reset / 1000), // Unix timestamp in seconds
+      };
+    } catch (error) {
+      console.error("Upstash rate limit error, falling back to memory:", error);
+      // Fallback to in-memory if redis fails
+    }
+  }
+  
+  return globalInMemoryLimiter.check(key);
 }
 
 export function getClientIp(headers: Headers): string {

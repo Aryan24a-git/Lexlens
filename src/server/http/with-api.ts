@@ -51,7 +51,7 @@ export async function validateApiRequest(
   const clientIp = getClientIp(req.headers);
 
   // 1. Rate limiting check
-  const rateLimit = checkRateLimit(clientIp);
+  const rateLimit = await checkRateLimit(clientIp);
   const rateLimitHeaders = {
     "x-ratelimit-limit": String(rateLimit.limit),
     "x-ratelimit-remaining": String(rateLimit.remaining),
