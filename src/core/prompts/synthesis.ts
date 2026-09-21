@@ -11,30 +11,40 @@ import type { Clause, ClauseAnalysis } from "../domain/schemas";
 export const SYNTHESIS_PROMPT_VERSION = "2026-09-20.1";
 
 export const synthesisOutputSchema = z.object({
-  docType: z.union([z.enum(DOC_TYPES), z.string()]).transform((val) => {
+  docType: z.union([z.enum(DOC_TYPES), z.string()]).optional().default("other").transform((val) => {
     const v = val.toLowerCase();
     return (DOC_TYPES as readonly string[]).includes(v) ? (v as any) : "other";
   }),
   parties: z.union([
     z.array(z.string()),
     z.string().transform((s) => [s]),
-  ]).transform((val) => (val.length > 0 ? val : ["Identified in agreement"])),
+  ]).optional().default(["Identified in agreement"]).transform((val) => (val.length > 0 ? val : ["Identified in agreement"])),
   tldr: z.string().optional().default("Document synthesis complete.").transform((s) => s.slice(0, 1000)),
   keyFacts: z.array(
     z.object({
-      label: z.string().min(1),
-      value: z.string().min(1),
+      label: z.string().optional().default("Key Term"),
+      value: z.string().optional().default(""),
+      fact: z.string().optional(),
       citations: z.union([
         z.array(citationSchema),
+        z.array(z.object({
+          clauseId: z.string().transform((c) => (c.startsWith("C") ? c : `C${c}`)),
+          quote: z.string().transform((q) => q.slice(0, 200)),
+          verified: z.boolean().optional().default(false),
+        })),
         z.array(z.string().transform((str) => ({ clauseId: "C1", quote: str.slice(0, 100), verified: false }))),
       ]).optional().default([]),
-    })
+    }).transform((f) => ({
+      label: f.label || "Key Term",
+      value: f.value || f.fact || "Detail from agreement",
+      citations: (f.citations || []) as Array<{ clauseId: string; quote: string; verified: boolean }>,
+    }))
   ).optional().default([]),
   topRisks: z.array(
     z.object({
-      clauseId: z.string().transform((c) => (c.startsWith("C") ? c : `C${c}`)),
-      headline: z.string().min(1).transform((h) => h.slice(0, 200)),
-      level: z.union([z.enum(RISK_LEVELS), z.string()]).transform((l) => {
+      clauseId: z.string().optional().default("C1").transform((c) => (c.startsWith("C") ? c : `C${c}`)),
+      headline: z.string().optional().default("Risk identified").transform((h) => h.slice(0, 200)),
+      level: z.union([z.enum(RISK_LEVELS), z.string()]).optional().default("info").transform((l) => {
         const v = l.toLowerCase();
         return v === "high" || v === "medium" || v === "low" || v === "info" ? (v as any) : "info";
       }),

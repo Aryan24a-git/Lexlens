@@ -9,7 +9,6 @@
 
 import Groq from "groq-sdk";
 import type { ZodTypeAny, z } from "zod";
-import { zodToJsonSchema } from "zod-to-json-schema";
 import type {
   LLMProvider,
   GenerateObjectOptions,
@@ -20,9 +19,49 @@ import { withRetry } from "./retry";
 import { makeError } from "@/lib/result";
 import { env } from "@/server/config/env";
 
+/** Recursively converts Zod schemas (including Zod 4 & transformations) into a clean JSON blueprint for the LLM */
+export function describeZodSchema(schema: unknown): unknown {
+  if (!schema || typeof schema !== "object") return "any";
+  const def = (schema as any)._def || (schema as any).def || {};
+  const type = def.type || def.typeName;
+
+  if (type === "string" || type === "ZodString") return "string";
+  if (type === "number" || type === "ZodNumber") return 0;
+  if (type === "boolean" || type === "ZodBoolean") return true;
+  if (type === "enum" || type === "ZodEnum") {
+    const values = def.entries ? Object.keys(def.entries) : def.values;
+    return values ? values.join(" | ") : "string";
+  }
+  if (type === "array" || type === "ZodArray") {
+    const el = def.element || (schema as any).element;
+    return [describeZodSchema(el)];
+  }
+  if (type === "object" || type === "ZodObject") {
+    const shape = typeof def.shape === "function" ? def.shape() : (def.shape || (schema as any).shape || {});
+    const obj: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(shape)) {
+      obj[k] = describeZodSchema(v);
+    }
+    return obj;
+  }
+  if (type === "union" || type === "ZodUnion") {
+    const options = def.options || [];
+    return options.length > 0 ? describeZodSchema(options[0]) : "any";
+  }
+  if (type === "optional" || type === "ZodOptional" || type === "default" || type === "ZodDefault") {
+    const inner = def.innerType || def.schema;
+    return describeZodSchema(inner);
+  }
+  if (type === "transform" || type === "ZodEffects" || type === "pipe" || type === "ZodPipeline") {
+    const inner = def.schema || (schema as any).schema || def.in;
+    return describeZodSchema(inner);
+  }
+  return "any";
+}
+
 /** Build the JSON schema instruction appended to the system prompt */
 function jsonModeInstruction(schemaDescription: string): string {
-  return `\n\nRespond with ONLY a valid JSON object. No prose, no markdown fences.\nSchema: ${schemaDescription}`;
+  return `\n\nRespond with ONLY a valid JSON object matching this structure. No prose, no markdown fences.\nJSON Blueprint:\n${schemaDescription}`;
 }
 
 /** Rough token estimator: ~4 chars per token */
@@ -46,9 +85,9 @@ export class GroqProvider implements LLMProvider {
   ): Promise<z.infer<S>> {
     const { model, system, user, schema, temperature = 0.1, signal } = options;
 
-    // Build a complete JSON schema for the model
-    const jsonSchema = zodToJsonSchema(schema as any, "Output");
-    const schemaDesc = JSON.stringify(jsonSchema);
+    // Build a complete JSON schema blueprint for the model
+    const blueprint = describeZodSchema(schema);
+    const schemaDesc = JSON.stringify(blueprint, null, 2);
 
     const systemWithJson = system + jsonModeInstruction(schemaDesc);
 

@@ -190,6 +190,11 @@ export async function analyzeDocument(
   await runWithConcurrency(batches, 1, async (batch, batchIdx) => {
     if (signal?.aborted) return;
 
+    // Small rate-limit pacing delay between batches
+    if (batchIdx > 0) {
+      await new Promise((resolve) => setTimeout(resolve, 800));
+    }
+
     try {
       const userPrompt = buildClauseAnalysisPrompt({
         role: request.perspective,
