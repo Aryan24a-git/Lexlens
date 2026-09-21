@@ -96,7 +96,11 @@ export async function handleAskRequest(
       });
     } catch (err: unknown) {
       const errorMessage =
-        err instanceof Error ? err.message : "Error answering question";
+        err instanceof Error
+          ? err.message
+          : (err as any)?.message ?? "Error answering question";
+
+      console.error("[API_ASK_ERROR]", err);
 
       controller.send("error", {
         code: "INTERNAL_ERROR",

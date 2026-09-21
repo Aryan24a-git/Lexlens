@@ -88,7 +88,11 @@ export async function handleActionsRequest(
     });
   } catch (err: unknown) {
     const errorMessage =
-      err instanceof Error ? err.message : "Error executing action";
+      err instanceof Error
+        ? err.message
+        : (err as any)?.message ?? "Error generating actions";
+
+    console.error("[API_ACTIONS_ERROR]", err);
 
     logApiMetrics({
       requestId: context.requestId,
@@ -100,11 +104,7 @@ export async function handleActionsRequest(
     });
 
     return createErrorResponse(
-      makeError(
-        "INTERNAL_ERROR",
-        `Failed to complete action: ${errorMessage}`,
-        true
-      ),
+      makeError("INTERNAL_ERROR", errorMessage, true),
       { "x-request-id": context.requestId }
     );
   }
