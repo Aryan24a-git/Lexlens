@@ -2,18 +2,26 @@
 
 > **A GenAI-powered legal document assistant that gives you a lawyer's-eye view of contracts, agreements, and policies — without pretending to be a lawyer.**
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-lexlens--one.vercel.app-10b981?style=for-the-badge&logo=vercel)](https://lexlens-one.vercel.app)
 [![Next.js](https://img.shields.io/badge/Next.js-16.3.5-black?style=flat&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue?style=flat&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x_Strict-3178c6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Groq](https://img.shields.io/badge/LLM-Groq_LLaMA_3.3--70B-orange)](https://groq.com/)
-[![Tests](https://img.shields.io/badge/Tests-206_Passing-brightgreen)](https://vitest.dev/)
+[![Groq](https://img.shields.io/badge/LLM-Groq_Cloud_Fast_Inference-orange)](https://groq.com/)
+[![Tests](https://img.shields.io/badge/Tests-202_Passing-brightgreen)](https://vitest.dev/)
 [![Evals](https://img.shields.io/badge/Evals-8%2F8_Gates_Passed-success)](./tests/evals)
+
+---
+
+## 🌐 Live Production Application
+
+Explore the live, deployed web application:
+👉 **[https://lexlens-one.vercel.app](https://lexlens-one.vercel.app)**
 
 ---
 
 ## 🏛️ Problem Statement
 
-Legal information is complex, opaque, and difficult to navigate without costly professional legal assistance. People routinely sign apartment leases, employment offers, consulting agreements, and SaaS terms of service without understanding the hidden obligations, unilateral indemnities, or severe liability risks embedded in them.
+Legal documents are complex, opaque, and difficult to navigate without costly professional legal assistance. People routinely sign apartment leases, employment offers, consulting agreements, and SaaS terms of service without understanding the hidden obligations, unilateral indemnities, or severe liability risks embedded in them.
 
 **LexLens** bridges this gap by making legal text accessible, transparent, and actionable through:
 1. **Perspective-Aware Analysis:** Evaluates risk specifically from *your* role (e.g. Tenant vs Landlord, Employee vs Employer, Contractor vs Client).
@@ -30,11 +38,11 @@ Legal information is complex, opaque, and difficult to navigate without costly p
 - **Client-Side Ingestion:** Parses PDFs (`pdf.js`), Word documents (`mammoth`), and plain text without raw files leaving the browser.
 - **Deterministic Clause Segmentation:** Segments contracts into addressable units with Bates stamp IDs (`C1`, `C2`, etc.).
 - **Interactive Vellum Sheet:** Beautiful Chambers & Paper reading sheet accompanied by dynamic marginalia notes, risk pills, and confidence meters.
-- **Real-Time Streaming:** SSE streaming analysis via Groq LLaMA 3.3-70B.
+- **Real-Time Streaming:** SSE streaming analysis via Groq Cloud LLM providers.
 
 ### 2. Contract Comparison (`/compare`)
 - **Word-Level Redline:** Visualizes additions and deletions side-by-side or unified using deterministic diffing.
-- **Top 3 Changes That Matter:** Flags critical shifts in liability, deadlines, and payment terms between draft versions.
+- **Top Changes That Matter:** Flags critical shifts in liability, deadlines, and payment terms between draft versions.
 
 ### 3. Grounded Q&A
 - **BM25 Lexical Indexing:** Retrieves exact relevant clauses using in-memory BM25 index.
@@ -91,8 +99,8 @@ flowchart TD
     end
 
     subgraph LLM ["Groq Cloud (Zero Data Retention)"]
-        LLaMA_Main["LLaMA 3.3-70B Versatile (Deep Analysis & Compare)"]
-        LLaMA_Fast["LLaMA 3.1-8B Instant (Fast Classification & Q&A)"]
+        LLM_Main["LLM Main (Deep Analysis, Compare & Actions)"]
+        LLM_Fast["LLM Fast (Classification & Grounded Q&A)"]
     end
 
     UI --> Parser --> Segmenter
@@ -103,15 +111,15 @@ flowchart TD
     UI -- "Draft A & B" --> API_Compare
     UI -- "Selected Action" --> API_Actions
 
-    API_Analyze --> LLaMA_Main
+    API_Analyze --> LLM_Main
     API_Ask --> Escalation
     Escalation -- "Crisis Bypass (988)" --> UI
-    Escalation -- "Grounded Prompt" --> LLaMA_Fast
-    API_Compare --> LLaMA_Main
-    API_Actions --> LLaMA_Main
+    Escalation -- "Grounded Prompt" --> LLM_Fast
+    API_Compare --> LLM_Main
+    API_Actions --> LLM_Main
 
-    LLaMA_Main --> Verifier
-    LLaMA_Fast --> Verifier
+    LLM_Main --> Verifier
+    LLM_Fast --> Verifier
     Verifier -- "Verified Quotes & Claims" --> UI
 ```
 
@@ -125,7 +133,7 @@ flowchart TD
 
 ### 2. Installation
 ```bash
-git clone https://github.com/your-org/lexlens.git
+git clone https://github.com/Aryan24a-git/Lexlens.git
 cd lexlens
 npm install
 ```
@@ -167,7 +175,7 @@ In Demo Mode:
 
 ## 🧪 Testing & Evaluation Gates
 
-LexLens enforces rigorous automated testing and evaluation gates per `brain.md` §14:
+LexLens enforces rigorous automated testing and evaluation gates:
 
 ```bash
 # Run all 200+ unit and integration tests
@@ -199,8 +207,6 @@ npm run eval
 | **Escalation** | Urgent crisis & court case trigger recall | ≥ 95% | ✔ 100% PASS |
 | **Escalation** | Benign clause false-positive rate | < 5% | ✔ 0% PASS |
 | **Readability** | Flesch-Kincaid grade level of plain summaries | ≤ 9.0 | ✔ Grade 8 PASS |
-
-*Evaluation reports are automatically generated with timestamps and saved to `tests/evals/results/*.json`.*
 
 ---
 
