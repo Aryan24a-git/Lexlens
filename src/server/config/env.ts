@@ -20,9 +20,7 @@ const envSchema = z.object({
   MAX_BODY_BYTES: z.coerce.number().positive().catch(2_000_000),
   LLM_TIMEOUT_MS: z.coerce.number().positive().catch(55_000),
 
-  // Rate limiting (optional in dev)
-  UPSTASH_REDIS_REST_URL: z.string().trim().url().optional().catch(undefined),
-  UPSTASH_REDIS_REST_TOKEN: z.string().trim().min(1).optional().catch(undefined),
+
 
   // Flags
 

@@ -16,8 +16,6 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@upstash/ratelimit": "^2.1.0",
-    "@upstash/redis": "^1.39.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dexie": "^4.4.6",
