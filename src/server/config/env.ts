@@ -6,28 +6,11 @@ import { z } from "zod";
  * Import `env` from here — never access process.env directly. (D-002)
  */
 const envSchema = z.object({
-  // LLM (Groq)
+  // Only read the API key from environment
   GROQ_API_KEY:
     process.env.NODE_ENV === "test"
       ? z.string().default("mock-groq-api-key-for-tests")
       : z.string().min(1, "GROQ_API_KEY is required"),
-  LLM_MODEL_MAIN: z.string().optional().transform(() => "llama-3.1-8b-instant"),
-  LLM_MODEL_FAST: z.string().optional().transform(() => "llama-3.1-8b-instant"),
-  LLM_MODEL_DEEP: z.string().optional().transform(() => "llama-3.1-8b-instant"),
-
-  // Limits
-  MAX_CLAUSES_PER_REQUEST: z.coerce.number().positive().catch(600),
-  MAX_BODY_BYTES: z.coerce.number().positive().catch(2_000_000),
-  LLM_TIMEOUT_MS: z.coerce.number().positive().catch(55_000),
-
-
-
-  // Flags
-
-  DEBUG_PROMPTS: z.coerce.boolean().default(false),
-  NODE_ENV: z
-    .enum(["development", "test", "production"])
-    .default("development"),
 });
 
 const parsed = envSchema.safeParse(process.env);
@@ -40,5 +23,21 @@ if (!parsed.success) {
   throw new Error("Invalid environment configuration — check .env.example");
 }
 
-export const env = parsed.data;
+export const env = {
+  ...parsed.data,
+  // Hardcoded LLM config to prevent Vercel overrides
+  LLM_MODEL_MAIN: "llama3-8b-8192",
+  LLM_MODEL_FAST: "llama3-8b-8192",
+  LLM_MODEL_DEEP: "llama3-8b-8192",
+  
+  // Hardcoded Limits
+  MAX_CLAUSES_PER_REQUEST: 600,
+  MAX_BODY_BYTES: 2_000_000,
+  LLM_TIMEOUT_MS: 55_000,
+  
+  // Hardcoded Flags
+  DEBUG_PROMPTS: false,
+  NODE_ENV: process.env.NODE_ENV || "development",
+};
+
 export type Env = typeof env;
