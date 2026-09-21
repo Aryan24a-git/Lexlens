@@ -23,7 +23,6 @@ export default defineConfig({
     port: 3000,
     reuseExistingServer: true,
     env: {
-      DEMO_MODE: "1",
       GROQ_API_KEY: "mock-groq-key",
       NODE_ENV: "development",
     },

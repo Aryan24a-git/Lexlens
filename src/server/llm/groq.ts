@@ -125,15 +125,12 @@ export class GroqProvider implements LLMProvider {
   }
 }
 
-import { getDemoProvider } from "./demo-provider";
+
 
 /** Singleton — one provider instance per server process */
 let _provider: GroqProvider | null = null;
 
 export function getGroqProvider(): LLMProvider {
-  if (env.DEMO_MODE) {
-    return getDemoProvider();
-  }
   if (!_provider) {
     _provider = new GroqProvider();
   }

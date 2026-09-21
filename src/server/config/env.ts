@@ -8,9 +8,7 @@ import { z } from "zod";
 const envSchema = z.object({
   // LLM (Groq)
   GROQ_API_KEY:
-    process.env.NODE_ENV === "test" ||
-    process.env.DEMO_MODE === "1" ||
-    process.env.DEMO_MODE === "true"
+    process.env.NODE_ENV === "test"
       ? z.string().default("mock-groq-api-key-for-tests")
       : z.string().min(1, "GROQ_API_KEY is required"),
   LLM_MODEL_MAIN: z.string().default("llama-3.3-70b-versatile"),
@@ -27,7 +25,7 @@ const envSchema = z.object({
   UPSTASH_REDIS_REST_TOKEN: z.string().optional(),
 
   // Flags
-  DEMO_MODE: z.coerce.boolean().default(false),
+
   DEBUG_PROMPTS: z.coerce.boolean().default(false),
   NODE_ENV: z
     .enum(["development", "test", "production"])
