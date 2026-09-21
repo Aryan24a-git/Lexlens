@@ -16,9 +16,9 @@ const envSchema = z.object({
   LLM_MODEL_DEEP: z.string().default("llama-3.3-70b-versatile"),
 
   // Limits
-  MAX_CLAUSES_PER_REQUEST: z.coerce.number().positive().default(600),
-  MAX_BODY_BYTES: z.coerce.number().positive().default(2_000_000),
-  LLM_TIMEOUT_MS: z.coerce.number().positive().default(55_000),
+  MAX_CLAUSES_PER_REQUEST: z.preprocess((v) => (v === "" ? undefined : v), z.coerce.number().positive().default(600)),
+  MAX_BODY_BYTES: z.preprocess((v) => (v === "" ? undefined : v), z.coerce.number().positive().default(2_000_000)),
+  LLM_TIMEOUT_MS: z.preprocess((v) => (v === "" ? undefined : v), z.coerce.number().positive().default(55_000)),
 
   // Rate limiting (optional in dev)
   UPSTASH_REDIS_REST_URL: z.string().optional(),
