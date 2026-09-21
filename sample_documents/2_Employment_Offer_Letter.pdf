@@ -12,7 +12,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
 endobj
 5 0 obj
-<< /Length 1903 >>
+<< /Length 1906 >>
 stream
 BT
 /F1 14 Tf
@@ -23,6 +23,7 @@ BT
 /F1 10 Tf
 50 720 Td
 14 TL
+T*
 (1. POSITION AND DUTIES) '
 (Acme Technologies Inc. \("Company"\) is pleased to offer you the full-time position of Senior Software Engineer, reporting to the VP of Engineering.) '
 T*
@@ -48,7 +49,6 @@ T*
 (This offer letter is governed by the laws of the State of California.) '
 T*
 ET
-
 endstream
 endobj
 xref
@@ -62,5 +62,5 @@ xref
 trailer
 << /Size 6 /Root 1 0 R >>
 startxref
-2303
+2306
 %%EOF

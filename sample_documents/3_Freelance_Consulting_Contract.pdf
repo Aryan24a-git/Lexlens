@@ -1,0 +1,63 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 1732 >>
+stream
+BT
+/F1 14 Tf
+50 750 Td
+(FREELANCE CONSULTING AGREEMENT) Tj
+ET
+BT
+/F1 10 Tf
+50 720 Td
+14 TL
+T*
+(1. SCOPE OF SERVICES) '
+(Contractor agrees to perform brand design and frontend web development services as described in Statement of Work #1 attached hereto.) '
+T*
+(2. COMPENSATION & PAYMENT TERMS) '
+(Client shall pay Contractor at the fixed rate of $95.00 USD per hour. Contractor shall invoice bi-weekly, and Client shall remit payment within fifteen \(15\) days of invoice receipt \(Net 15\). Overdue payments shall accrue interest at 1.5% per month.) '
+T*
+(3. INDEPENDENT CONTRACTOR STATUS) '
+(Contractor is an independent contractor, not an employee of Client. Contractor is solely responsible for paying all federal, state, and local income taxes and self-employment taxes.) '
+T*
+(4. INTELLECTUAL PROPERTY RIGHTS) '
+(Upon full payment of all applicable fees, Contractor assigns to Client all right, title, and interest in deliverables created under this Agreement. Contractor retains ownership of pre-existing tools, libraries, and background technology.) '
+T*
+(5. CONFIDENTIALITY) '
+(Each party agrees to hold the other party's proprietary information in strict confidence and use it solely for fulfilling obligations under this Agreement.) '
+T*
+(6. TERMINATION) '
+(Either party may terminate this Agreement without cause upon fourteen \(14\) days prior written notice. Client shall pay Contractor for all services performed up to the date of termination.) '
+T*
+(7. LIMITATION OF LIABILITY) '
+(Neither party shall be liable for indirect, incidental, or consequential damages. Contractor's total aggregate liability shall not exceed the total fees paid by Client under this Agreement in the preceding three \(3\) months.) '
+T*
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000234 00000 n 
+0000000305 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2132
+%%EOF

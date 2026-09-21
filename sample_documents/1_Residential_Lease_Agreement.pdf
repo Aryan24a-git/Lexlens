@@ -12,7 +12,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
 endobj
 5 0 obj
-<< /Length 3801 >>
+<< /Length 3804 >>
 stream
 BT
 /F1 14 Tf
@@ -23,6 +23,7 @@ BT
 /F1 10 Tf
 50 720 Td
 14 TL
+T*
 (1. PREMISES & OCCUPANCY) '
 (Landlord hereby leases to Tenant, and Tenant hereby leases from Landlord, the residential dwelling located at 742 Evergreen Terrace, Apartment 4B, Springfield \("Premises"\), for use solely as a private residential dwelling by Tenant and named occupants.) '
 T*
@@ -66,7 +67,6 @@ T*
 (This document constitutes the entire agreement between the parties with respect to the subject matter hereof and supersedes all prior agreements, oral or written. Any amendment must be in writing and signed by both parties.) '
 T*
 ET
-
 endstream
 endobj
 xref
@@ -80,5 +80,5 @@ xref
 trailer
 << /Size 6 /Root 1 0 R >>
 startxref
-4201
+4204
 %%EOF
