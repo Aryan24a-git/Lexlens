@@ -75,7 +75,7 @@ class InMemoryRateLimiter {
 const globalInMemoryLimiter = new InMemoryRateLimiter(60, 60_000); // 60 req/min default
 
 let upstashRatelimit: Ratelimit | null = null;
-if (env.UPSTASH_REDIS_REST_URL && env.UPSTASH_REDIS_REST_TOKEN) {
+if (env.UPSTASH_REDIS_REST_URL?.startsWith("http") && env.UPSTASH_REDIS_REST_TOKEN) {
   upstashRatelimit = new Ratelimit({
     redis: new Redis({
       url: env.UPSTASH_REDIS_REST_URL,
