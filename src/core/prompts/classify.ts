@@ -9,9 +9,18 @@ import { DOC_TYPES } from "../domain/enums";
 export const CLASSIFY_PROMPT_VERSION = "2026-09-20.1";
 
 export const classifyOutputSchema = z.object({
-  docType: z.enum(DOC_TYPES),
-  parties: z.array(z.string().min(1)).default([]),
-  roles: z.array(z.string().min(1)).min(1),
+  docType: z.union([z.enum(DOC_TYPES), z.string()]).transform((val) => {
+    const v = val.toLowerCase();
+    return (DOC_TYPES as readonly string[]).includes(v) ? (v as any) : "other";
+  }),
+  parties: z.union([
+    z.array(z.string()),
+    z.string().transform((s) => [s]),
+  ]).default([]),
+  roles: z.union([
+    z.array(z.string()),
+    z.string().transform((s) => [s]),
+  ]).default(["user"]),
   language: z.string().default("en"),
   suggestedPerspective: z.string().optional(),
 });

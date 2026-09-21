@@ -184,7 +184,7 @@ export async function analyzeDocument(
     jurisdiction: request.jurisdiction,
   });
 
-  await runWithConcurrency(batches, 4, async (batch, batchIdx) => {
+  await runWithConcurrency(batches, 1, async (batch, batchIdx) => {
     if (signal?.aborted) return;
 
     try {
@@ -219,6 +219,8 @@ export async function analyzeDocument(
             clauseId: clause.id,
             canonicalType: "other",
             plainSummary: clause.text.slice(0, 150) + "...",
+            obligations: [],
+            rights: [],
             risk: {
               level: "info",
               reasons: ["Standard provision requiring review."],
@@ -261,6 +263,8 @@ export async function analyzeDocument(
           clauseId: clause.id,
           canonicalType: "other",
           plainSummary: clause.text.slice(0, 150) + "...",
+          obligations: [],
+          rights: [],
           risk: {
             level: "info",
             reasons: ["Analysis failed for this clause; retry available."],

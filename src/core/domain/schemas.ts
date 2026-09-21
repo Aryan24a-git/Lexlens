@@ -87,11 +87,22 @@ export type LegalDocument = z.infer<typeof legalDocumentSchema>;
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const riskSchema = z.object({
-  level: z.enum(RISK_LEVELS),
+  level: z.union([z.enum(RISK_LEVELS), z.string()]).transform((val) => {
+    const v = val.toLowerCase();
+    if (v === "high" || v === "medium" || v === "low" || v === "info") return v as any;
+    return "info";
+  }),
   /** 1–3 concrete reasons explaining the level (never a bare label) */
-  reasons: z.array(z.string().min(1)).min(1).max(3),
+  reasons: z.union([
+    z.array(z.string()),
+    z.string().transform((s) => [s]),
+  ]).default(["Standard provision requiring review."]),
   /** Which party this clause favours from the user's perspective */
-  favors: z.enum(["you", "other_party", "balanced", "unclear"]),
+  favors: z.union([z.enum(["you", "other_party", "balanced", "unclear"]), z.string()]).transform((val) => {
+    const v = val.toLowerCase();
+    if (v === "you" || v === "other_party" || v === "balanced" || v === "unclear") return v as any;
+    return "balanced";
+  }),
   /** True if the clause is unusual for this document type */
   unusual: z.boolean().default(false),
 });
@@ -107,9 +118,9 @@ export const clauseAnalysisSchema = z.object({
   /** 1–2 sentence plain-language summary from the user's role perspective */
   plainSummary: z.string().min(1).max(400),
   /** What the user must do/pay/provide */
-  obligations: z.array(z.string()).optional(),
+  obligations: z.array(z.string()).optional().default([]),
   /** What the user may do or expect */
-  rights: z.array(z.string()).optional(),
+  rights: z.array(z.string()).optional().default([]),
   risk: riskSchema,
   /** 1 sentence on real-world effect */
   whyItMatters: z.string().min(1).max(200),

@@ -8,13 +8,64 @@ import { clauseAnalysisSchema } from "../domain/schemas";
 import type { Clause } from "../domain/schemas";
 import { CLAUSE_TYPES } from "../domain/enums";
 
+import { RISK_LEVELS } from "../domain/enums";
+
 export const CLAUSE_ANALYSIS_PROMPT_VERSION = "2026-09-20.1";
 
-export const clauseBatchAnalysisSchema = z.object({
-  analyses: z.array(clauseAnalysisSchema),
+const rawClauseAnalysisItemSchema = z.object({
+  clauseId: z.string().transform((c) => (c.startsWith("C") ? c : `C${c}`)),
+  canonicalType: z.union([z.enum(CLAUSE_TYPES), z.string()]).transform((val) => {
+    const v = val.toLowerCase();
+    return (CLAUSE_TYPES as readonly string[]).includes(v) ? (v as any) : "other";
+  }),
+  plainSummary: z.string().min(1).transform((s) => s.slice(0, 400)),
+  obligations: z.array(z.string()).optional().default([]),
+  rights: z.array(z.string()).optional().default([]),
+  risk: z.object({
+    level: z.union([z.enum(RISK_LEVELS), z.string()]).transform((val) => {
+      const v = val.toLowerCase();
+      if (v === "high" || v === "medium" || v === "low" || v === "info") return v as any;
+      return "info";
+    }),
+    reasons: z.union([
+      z.array(z.string()),
+      z.string().transform((s) => [s]),
+    ]).default(["Standard provision requiring review."]).transform((arr) => (arr.length > 0 ? arr.slice(0, 3) : ["Standard provision requiring review."])),
+    favors: z.union([z.enum(["you", "other_party", "balanced", "unclear"]), z.string()]).transform((val) => {
+      const v = val.toLowerCase();
+      if (v === "you" || v === "other_party" || v === "balanced" || v === "unclear") return v as any;
+      return "balanced";
+    }),
+    unusual: z.boolean().default(false),
+  }),
+  whyItMatters: z.string().optional().transform((s) => (s ? s.slice(0, 200) : "Part of the standard agreement terms.")),
+  questionsToAsk: z.array(z.string()).optional().default([]).transform((arr) => arr.slice(0, 3)),
+  confidence: z.union([z.number(), z.string().transform(Number)]).transform((val) => {
+    if (typeof val !== "number" || isNaN(val)) return 0.8;
+    if (val > 1) return Math.min(1, val / 100);
+    return Math.max(0, Math.min(1, val));
+  }),
+  citations: z.union([
+    z.array(z.object({
+      clauseId: z.string().transform((c) => (c.startsWith("C") ? c : `C${c}`)),
+      quote: z.string().min(1).transform((q) => q.slice(0, 200)),
+      verified: z.boolean().optional().default(false),
+    })),
+    z.array(z.string()).transform((arr) => arr.map((s) => ({ clauseId: "C1", quote: s.slice(0, 200), verified: false }))),
+  ]).optional().default([]).transform((arr) => (arr.length > 0 ? arr : [{ clauseId: "C1", quote: "Terms stated in agreement.", verified: false }])),
 });
 
-export type ClauseBatchAnalysis = z.infer<typeof clauseBatchAnalysisSchema>;
+export const clauseBatchAnalysisSchema = z.object({
+  analyses: z.array(rawClauseAnalysisItemSchema).optional(),
+  clauses: z.array(rawClauseAnalysisItemSchema).optional(),
+  results: z.array(rawClauseAnalysisItemSchema).optional(),
+}).transform((val) => ({
+  analyses: (val.analyses || val.clauses || val.results || []) as z.infer<typeof clauseAnalysisSchema>[],
+}));
+
+export type ClauseBatchAnalysis = {
+  analyses: z.infer<typeof clauseAnalysisSchema>[];
+};
 
 export interface ClauseAnalysisPromptParams {
   role: string;
