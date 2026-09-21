@@ -1,0 +1,39 @@
+# LexLens: Video Walkthrough Master Script
+Live Demo URL: https://lexlens-one.vercel.app
+Target Duration: 2.5 - 3.0 Minutes
+
+================================================================================
+Part 1: Introduction (0:00 - 0:25)
+================================================================================
+[ACTION] Open https://lexlens-one.vercel.app homepage in fullscreen.
+[SAY] "Hello everyone! This is LexLens - a GenAI-powered legal document assistant designed to help people understand, compare, and navigate complex contracts before signing. Legal text is intentionally dense and intimidating. LexLens gives you a lawyer's-eye view of your document, highlighting risks, answering questions with verifiable proof, and preparing you for action."
+
+================================================================================
+Part 2: Uploading a PDF & Clause X-Ray (0:25 - 1:00)
+================================================================================
+[ACTION] Click "Analyze a Document", drag and drop 1_Residential_Lease_Agreement.pdf into workspace. Show document loaded with Bates stamps (C1, C2, C3) and right-side X-Ray analysis panel.
+[SAY] "Let us upload a residential lease agreement in PDF format. Everything happens with zero-retention privacy: the PDF is parsed 100% inside your browser using Web Workers, so raw files never leave your device. LexLens segments the contract into addressable clauses with Bates stamp IDs like C1, C2, and C3. Notice our Perspective selector: contracts are asymmetric. LexLens evaluates risk specifically from your role. On the right, X-Ray marginalia breaks down clauses into plain English and flags risk levels."
+
+================================================================================
+Part 3: Grounded Q&A with Verifiable Citations (1:00 - 1:35)
+================================================================================
+[ACTION] Click "Ask" tab, type: "What is the rent and when is it due?", submit question. Click citation badge C3 to show auto-scrolling and highlighting in the left document.
+[SAY] "Now let us ask a question: What is the rent and when is it due? Unlike standard chatbots that make things up, LexLens enforces a strict fail-closed citation contract. Every answer is backed by a verbatim quote verified against the source text. Clicking any citation pill instantly scrolls to and highlights the exact clause in the document. And if a user enters a crisis situation, LexLens surfaces immediate legal-aid referral banners."
+
+================================================================================
+Part 4: Contract Comparison & Redline (1:35 - 2:05)
+================================================================================
+[ACTION] Click "Compare" in top navigation, click "Load Sample" to load Draft V1 vs Draft V2. Show word-level diff (green additions, red strikethroughs) and "Top Changes That Matter".
+[SAY] "Next, let us look at Compare. When you receive an updated draft of a contract, LexLens aligns matching clauses across revisions and runs a word-level Myers diff. More importantly, it surfaces the changes that actually matter - instantly alerting you if rent jumped, if late fees tripled, or if notice periods were shortened."
+
+================================================================================
+Part 5: Action Checklist, Calendar Sync & Lawyer Brief (2:05 - 2:40)
+================================================================================
+[ACTION] Return to /workspace, open "Actions" tab, show Obligations Checklist with checkboxes. Click "Export .ics" to download calendar reminders. Click "Lawyer Brief" in top navigation. Scroll through the 2-page printable consultation brief.
+[SAY] "Finally, LexLens turns contracts into actionable next steps. Under the Actions tab, it extracts an interactive Obligations Checklist with deadlines and owners. Clicking Export .ics downloads a calendar file so you never miss a 30-day notice window. And if you decide to consult an attorney, Lawyer Brief generates a structured, printable brief with key liabilities and targeted questions to save you billable consultation time."
+
+================================================================================
+Part 6: Conclusion (2:40 - 2:55)
+================================================================================
+[ACTION] Click the LexLens logo to return to the landing page.
+[SAY] "LexLens bridges the gap between opaque legalese and everyday people - empowering you to know what you sign. It is built with Next.js, React 19, and Groq Cloud, verified with over 200 automated tests, and live right now at lexlens-one.vercel.app. Thank you!"
