@@ -25,6 +25,7 @@ import { useAnalysisStream } from "@/features/analysis";
 import { AskPanel } from "@/features/ask";
 import { ActionsPanel } from "@/features/actions";
 import { Icon } from "@/ui/icons/Icon";
+import { cn } from "@/lib/utils";
 import { type RiskLevel, type Perspective, PERSPECTIVES } from "@/core/domain/enums";
 
 /**
