@@ -54,12 +54,9 @@ const baseSynthesisSchema = z.object({
   inconsistencies: z.array(z.string()).optional().default([]),
 });
 
-export const synthesisOutputSchema = z.union([
-  baseSynthesisSchema,
-  z.array(baseSynthesisSchema).transform((arr) => arr[0] || ({} as any)),
-]).transform((val) => (Array.isArray(val) ? val[0] : val));
+export const synthesisOutputSchema = baseSynthesisSchema;
 
-export type SynthesisOutput = z.infer<typeof baseSynthesisSchema>;
+export type SynthesisOutput = z.infer<typeof synthesisOutputSchema>;
 
 export interface SynthesisPromptParams {
   role: string;
