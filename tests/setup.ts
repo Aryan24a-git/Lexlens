@@ -1,7 +1,9 @@
+import { vi } from "vitest";
+
 // Test setup file — imported by vitest before each test suite
 // Set test environment variables before any imports
 process.env.GROQ_API_KEY = process.env.GROQ_API_KEY || "mock-groq-api-key-for-tests";
-process.env.NODE_ENV = "test";
+(process.env as any).NODE_ENV = "test";
 
 // Mock next/navigation for component tests
 vi.mock("next/navigation", () => ({

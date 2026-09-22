@@ -61,6 +61,7 @@ describe("Ask API & SSE Grounded Q&A Integration", () => {
       clauses: sampleClauses,
       perspective: "tenant",
       docType: "lease_residential",
+      language: "en",
     };
 
     const request = new Request("http://localhost:3000/api/ask", {
@@ -124,6 +125,7 @@ describe("Ask API & SSE Grounded Q&A Integration", () => {
       question: "Does landlord provide free high-speed wifi?",
       clauses: sampleClauses,
       perspective: "tenant",
+      language: "en",
     };
 
     const request = new Request("http://localhost:3000/api/ask", {
@@ -163,6 +165,7 @@ describe("Ask API & SSE Grounded Q&A Integration", () => {
       question: "I am going to kill myself over this lease debt",
       clauses: sampleClauses,
       perspective: "tenant",
+      language: "en",
     };
 
     const request = new Request("http://localhost:3000/api/ask", {
@@ -215,6 +218,7 @@ describe("Ask API & SSE Grounded Q&A Integration", () => {
       question: "I received an eviction notice and landlord threatened to lock me out tomorrow",
       clauses: sampleClauses,
       perspective: "tenant",
+      language: "en",
     };
 
     const request = new Request("http://localhost:3000/api/ask", {

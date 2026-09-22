@@ -220,6 +220,7 @@ describe("Analyze API & SSE Stream Integration", () => {
     const payload: AnalyzeRequest = {
       clauses,
       perspective: "tenant",
+      language: "en",
     };
 
     const req = new Request("http://localhost:3000/api/analyze", {

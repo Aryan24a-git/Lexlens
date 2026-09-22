@@ -133,8 +133,12 @@ describe("Comparison Engine — Alignment & Word Diffing", () => {
       const parsedA = parseText(doc1.content, "lease-v1.txt");
       const parsedB = parseText(doc2.content, "lease-v2.txt");
 
-      const clausesA = segmentDocument(parsedA.value!);
-      const clausesB = segmentDocument(parsedB.value!);
+      expect(parsedA.ok).toBe(true);
+      expect(parsedB.ok).toBe(true);
+      if (!parsedA.ok || !parsedB.ok) return;
+
+      const clausesA = segmentDocument(parsedA.value);
+      const clausesB = segmentDocument(parsedB.value);
 
       expect(clausesA.length).toBe(14);
       expect(clausesB.length).toBe(14);

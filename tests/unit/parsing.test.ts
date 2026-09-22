@@ -212,7 +212,7 @@ startxref
     it("parses text and reports progress", async () => {
       const progressUpdates: number[] = [];
       const result = await ingestText("1. Agreement\nSample text content.", "sample.txt", {
-        onProgress: (p) => progressUpdates.push(p),
+        onProgress: (p: number) => progressUpdates.push(p),
       });
 
       expect(result.ok).toBe(true);

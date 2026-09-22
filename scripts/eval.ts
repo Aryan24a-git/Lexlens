@@ -21,8 +21,7 @@ import { detectEscalation } from "../src/core/safety/escalation-rules";
 import { scanForInjection } from "../src/core/safety/injection-scanner";
 import { alignClauses } from "../src/core/comparison/align";
 import { computeWordDiff } from "../src/core/comparison/diff";
-import type { Clause } from "../src/core/domain/clause";
-import type { Citation } from "../src/core/domain/schemas";
+import type { Clause, Citation } from "../src/core/domain/schemas";
 import type { RiskLevel } from "../src/core/domain/enums";
 
 export interface EvalMetricResult {
@@ -90,6 +89,7 @@ export async function runAllEvaluations(): Promise<FullEvalReport> {
     index: 1,
     startOffset: 0,
     endOffset: 250,
+    pages: [1],
     text: "Tenant agrees to pay monthly rent in the amount of $2,200.00 USD, due on the first day of each calendar month. A grace period of five (5) business days is permitted.",
   };
 
@@ -99,13 +99,11 @@ export async function runAllEvaluations(): Promise<FullEvalReport> {
     {
       clauseId: "C1",
       quote: "Tenant agrees to pay monthly rent in the amount of $2,200.00 USD, due on the first day of each calendar month.",
-      claim: "Monthly rent is $2,200 due on the first of the month.",
       verified: false,
     },
     {
       clauseId: "C1",
       quote: "A grace period of five (5) business days is permitted.",
-      claim: "There is a 5-day grace period.",
       verified: false,
     },
   ];
@@ -114,7 +112,6 @@ export async function runAllEvaluations(): Promise<FullEvalReport> {
     {
       clauseId: "C1",
       quote: "Landlord may enter at 3am without any prior notice.",
-      claim: "Landlord can enter at any hour without notice.",
       verified: false,
     },
   ];
@@ -151,6 +148,7 @@ export async function runAllEvaluations(): Promise<FullEvalReport> {
       index: 1,
       startOffset: 0,
       endOffset: 120,
+      pages: [1],
       heading: "Rent & Payments",
       text: "Tenant agrees to pay monthly rent of $2,200 due on the 1st of each month. Late fee of $50 applies.",
     },
@@ -159,6 +157,7 @@ export async function runAllEvaluations(): Promise<FullEvalReport> {
       index: 2,
       startOffset: 121,
       endOffset: 250,
+      pages: [1],
       heading: "Security Deposit",
       text: "Security deposit of $2,200 must be deposited upon lease signing, refundable within 14 days.",
     },
@@ -250,12 +249,12 @@ export async function runAllEvaluations(): Promise<FullEvalReport> {
   // 5. Compare Suite (Gate: >= 85% alignment recall, >= 80% favorsNow)
   // -------------------------------------------------------------
   const clausesV1: Clause[] = [
-    { id: "C1", index: 1, startOffset: 0, endOffset: 50, heading: "Rent", text: "Rent is $2,200 per month." },
-    { id: "C2", index: 2, startOffset: 51, endOffset: 100, heading: "Notice", text: "Notice of 30 days required." },
+    { id: "C1", index: 1, startOffset: 0, endOffset: 50, pages: [1], heading: "Rent", text: "Rent is $2,200 per month." },
+    { id: "C2", index: 2, startOffset: 51, endOffset: 100, pages: [1], heading: "Notice", text: "Notice of 30 days required." },
   ];
   const clausesV2: Clause[] = [
-    { id: "C1", index: 1, startOffset: 0, endOffset: 50, heading: "Rent", text: "Rent is $2,500 per month." },
-    { id: "C2", index: 2, startOffset: 51, endOffset: 100, heading: "Notice", text: "Notice of 60 days required." },
+    { id: "C1", index: 1, startOffset: 0, endOffset: 50, pages: [1], heading: "Rent", text: "Rent is $2,500 per month." },
+    { id: "C2", index: 2, startOffset: 51, endOffset: 100, pages: [1], heading: "Notice", text: "Notice of 60 days required." },
   ];
 
   const aligned = alignClauses(clausesV1, clausesV2);

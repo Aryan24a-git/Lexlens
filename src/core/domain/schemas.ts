@@ -390,7 +390,7 @@ export const analyzeRequestSchema = z.object({
   docType: z.enum(DOC_TYPES).optional(),
   perspective: z.enum(PERSPECTIVES),
   jurisdiction: z.string().max(100).optional(),
-  language: z.string().max(10).default("en"),
+  language: z.string().max(10).optional().default("en"),
   sessionId: z.string().optional(),
 });
 export type AnalyzeRequest = z.infer<typeof analyzeRequestSchema>;
@@ -401,7 +401,7 @@ export const askRequestSchema = z.object({
   docType: z.enum(DOC_TYPES).optional(),
   perspective: z.enum(PERSPECTIVES),
   jurisdiction: z.string().max(100).optional(),
-  language: z.string().max(10).default("en"),
+  language: z.string().max(10).optional().default("en"),
   sessionId: z.string().optional(),
 });
 export type AskRequest = z.infer<typeof askRequestSchema>;
@@ -414,7 +414,7 @@ export const compareRequestSchema = z.object({
   mode: z.enum(COMPARE_MODES).default("versions"),
   perspective: z.enum(PERSPECTIVES),
   jurisdiction: z.string().max(100).optional(),
-  language: z.string().max(10).default("en"),
+  language: z.string().max(10).optional().default("en"),
   sessionId: z.string().optional(),
 });
 export type CompareRequest = z.infer<typeof compareRequestSchema>;
@@ -427,7 +427,7 @@ export const actionsRequestSchema = z.object({
   perspective: z.enum(PERSPECTIVES),
   scenario: z.string().max(500).optional(),
   fileName: z.string().optional(),
-  language: z.string().max(10).default("en"),
+  language: z.string().max(10).optional().default("en"),
   sessionId: z.string().optional(),
 });
 export type ActionsRequest = z.infer<typeof actionsRequestSchema>;

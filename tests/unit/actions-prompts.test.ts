@@ -46,14 +46,18 @@ describe("P6 Actions Prompts & Schemas", () => {
   const sampleAnalyses: ClauseAnalysis[] = [
     {
       clauseId: "C3",
-      clauseIndex: 3,
-      type: "termination_convenience",
+      canonicalType: "termination_convenience",
       plainSummary: "Early termination requires 60 days notice and a penalty of two months rent.",
+      obligations: ["Provide 60 days notice"],
+      rights: [],
       risk: {
         level: "high",
         reasons: ["Severe financial penalty of two months rent"],
+        favors: "other_party",
+        unusual: false,
       },
-      favors: "other_party",
+      whyItMatters: "High penalty for early termination.",
+      questionsToAsk: [],
       confidence: 0.95,
       citations: [
         {
@@ -62,7 +66,6 @@ describe("P6 Actions Prompts & Schemas", () => {
           verified: true,
         },
       ],
-      promptVersion: "2026-09-20.1",
     },
   ];
 

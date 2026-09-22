@@ -146,9 +146,10 @@ describe("ui/patterns and ingest components", () => {
         expect(handleParsed).toHaveBeenCalled();
       });
 
-      const calledDoc = handleParsed.mock.calls[0][0];
-      expect(calledDoc.fileName).toBe("Residential Lease Agreement");
-      expect(calledDoc.fileType).toBe("txt");
+      const calledDoc = handleParsed.mock.calls[0]?.[0];
+      expect(calledDoc).toBeDefined();
+      expect(calledDoc?.fileName).toBe("Residential Lease Agreement");
+      expect(calledDoc?.fileType).toBe("txt");
     });
   });
 });

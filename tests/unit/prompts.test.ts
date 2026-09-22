@@ -133,6 +133,8 @@ describe("Prompts & Versions", () => {
             clauseId: "C1",
             canonicalType: "term_duration",
             plainSummary: "Lease term starts October 1.",
+            obligations: [],
+            rights: [],
             risk: {
               level: "low",
               reasons: ["Standard."],

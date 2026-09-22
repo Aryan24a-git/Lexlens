@@ -190,6 +190,8 @@ describe("Citation Verifier (brain.md §8)", () => {
         clauseId: "C1",
         canonicalType: "payment_fees",
         plainSummary: "Rent is $2500 due on the first.",
+        obligations: [],
+        rights: [],
         risk: {
           level: "low",
           reasons: ["Clear terms."],

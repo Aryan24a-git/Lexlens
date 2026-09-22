@@ -109,6 +109,8 @@ describe("X-Ray UI Patterns (design.md §8)", () => {
       clauseId: "C5",
       canonicalType: "payment_fees",
       plainSummary: "You must pay $1,500 by the 5th of each month.",
+      obligations: ["Pay $1,500 by the 5th"],
+      rights: [],
       whyItMatters: "Failure to pay incurs an immediate $75 penalty.",
       questionsToAsk: ["Can the due date be shifted to the 10th?"],
       risk: {
