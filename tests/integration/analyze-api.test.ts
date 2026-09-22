@@ -186,7 +186,7 @@ describe("Analyze API & SSE Stream Integration", () => {
 
     // P0 succeeds
     mock.onGenerateMatching(
-      (opt) => opt.model === env.LLM_MODEL_FAST,
+      (opt) => opt.user.includes("Classify the document below") || opt.model === env.LLM_MODEL_FAST,
       {
         docType: "lease_residential",
         parties: ["Landlord"],

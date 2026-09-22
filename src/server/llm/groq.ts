@@ -30,7 +30,11 @@ export function describeZodSchema(schema: unknown): unknown {
   if (type === "boolean" || type === "ZodBoolean") return true;
   if (type === "enum" || type === "ZodEnum") {
     const values = def.entries ? Object.keys(def.entries) : def.values;
-    return values ? values.join(" | ") : "string";
+    if (!values || values.length === 0) return "string";
+    if (values.length > 5) {
+      return `${values.slice(0, 4).join(" | ")} | ...`;
+    }
+    return values.join(" | ");
   }
   if (type === "array" || type === "ZodArray") {
     const el = def.element || (schema as any).element;

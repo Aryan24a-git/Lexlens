@@ -137,7 +137,7 @@ export async function analyzeDocument(
     });
 
     const classification = await provider.generateObject({
-      model: env.LLM_MODEL_FAST,
+      model: env.LLM_MODEL_MAIN,
       system: preamble,
       user: classifyPrompt,
       schema: classifyOutputSchema,
@@ -176,7 +176,7 @@ export async function analyzeDocument(
   // ───────────────────────────────────────────────────────────────────────────
   // Step 2: P2 Clause Analysis in parallel batches
   // ───────────────────────────────────────────────────────────────────────────
-  const batches = batchClauses(request.clauses, 8);
+  const batches = batchClauses(request.clauses, 10);
   const allAnalyses: ClauseAnalysis[] = [];
   const allCitations: Citation[] = [];
 
@@ -187,12 +187,12 @@ export async function analyzeDocument(
     jurisdiction: request.jurisdiction,
   });
 
-  await runWithConcurrency(batches, 1, async (batch, batchIdx) => {
+  await runWithConcurrency(batches, 2, async (batch, batchIdx) => {
     if (signal?.aborted) return;
 
     // Small rate-limit pacing delay between batches
     if (batchIdx > 0) {
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      await new Promise((resolve) => setTimeout(resolve, 500));
     }
 
     try {

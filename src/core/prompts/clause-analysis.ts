@@ -55,13 +55,15 @@ const rawClauseAnalysisItemSchema = z.object({
   ]).optional().default([]).transform((arr) => (arr.length > 0 ? arr : [{ clauseId: "C1", quote: "Terms stated in agreement.", verified: false }])),
 });
 
-export const clauseBatchAnalysisSchema = z.object({
-  analyses: z.array(rawClauseAnalysisItemSchema).optional(),
-  clauses: z.array(rawClauseAnalysisItemSchema).optional(),
-  results: z.array(rawClauseAnalysisItemSchema).optional(),
-}).transform((val) => ({
-  analyses: (val.analyses || val.clauses || val.results || []) as z.infer<typeof clauseAnalysisSchema>[],
-}));
+export const clauseBatchAnalysisSchema = z.union([
+  z.object({
+    analyses: z.array(rawClauseAnalysisItemSchema),
+  }),
+  z.array(rawClauseAnalysisItemSchema).transform((analyses) => ({ analyses })),
+]).transform((val) => {
+  if (Array.isArray(val)) return { analyses: val };
+  return { analyses: val.analyses || [] };
+});
 
 export type ClauseBatchAnalysis = {
   analyses: z.infer<typeof clauseAnalysisSchema>[];

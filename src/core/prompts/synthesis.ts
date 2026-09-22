@@ -10,7 +10,7 @@ import type { Clause, ClauseAnalysis } from "../domain/schemas";
 
 export const SYNTHESIS_PROMPT_VERSION = "2026-09-20.1";
 
-export const synthesisOutputSchema = z.object({
+const baseSynthesisSchema = z.object({
   docType: z.union([z.enum(DOC_TYPES), z.string()]).optional().default("other").transform((val) => {
     const v = val.toLowerCase();
     return (DOC_TYPES as readonly string[]).includes(v) ? (v as any) : "other";
@@ -54,7 +54,12 @@ export const synthesisOutputSchema = z.object({
   inconsistencies: z.array(z.string()).optional().default([]),
 });
 
-export type SynthesisOutput = z.infer<typeof synthesisOutputSchema>;
+export const synthesisOutputSchema = z.union([
+  baseSynthesisSchema,
+  z.array(baseSynthesisSchema).transform((arr) => arr[0] || ({} as any)),
+]).transform((val) => (Array.isArray(val) ? val[0] : val));
+
+export type SynthesisOutput = z.infer<typeof baseSynthesisSchema>;
 
 export interface SynthesisPromptParams {
   role: string;
