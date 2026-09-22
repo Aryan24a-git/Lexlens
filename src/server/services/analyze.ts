@@ -302,6 +302,9 @@ export async function analyzeDocument(
   // Step 3: P3 Document Synthesis
   // ───────────────────────────────────────────────────────────────────────────
   try {
+    // Pacing delay to avoid TPM burst limits on Groq free/on-demand tier
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+
     const synthesisPrompt = buildSynthesisPrompt({
       role: request.perspective,
       docType: detectedDocType,
@@ -342,7 +345,8 @@ export async function analyzeDocument(
     };
 
     emitter.emit("synthesis", synthesis);
-  } catch {
+  } catch (err: unknown) {
+    console.error("Synthesis error:", err);
     emitter.emit("warning", {
       code: "SYNTHESIS_FAILED",
       message: "Could not generate full document synthesis; individual clauses are available.",

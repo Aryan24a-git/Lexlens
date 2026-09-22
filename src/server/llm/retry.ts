@@ -24,8 +24,8 @@ export async function withRetry<T>(
   options: RetryOptions = {}
 ): Promise<T> {
   const {
-    maxAttempts = 3,
-    baseDelayMs = 1000,
+    maxAttempts = 5,
+    baseDelayMs = 1500,
     maxDelayMs = 30_000,
     retryableCodes = DEFAULT_RETRYABLE_CODES,
   } = options;
@@ -47,9 +47,12 @@ export async function withRetry<T>(
       // Extract retry-after if available on 429
       const retryAfterMs = extractRetryAfter(e);
       if (retryAfterMs !== null) {
-        await sleep(retryAfterMs + 1000);
+        await sleep(retryAfterMs + 1500);
+      } else if (code === 429) {
+        // Fallback for TPM window exhaustion on Groq
+        await sleep(Math.max(2500 * attempt, baseDelayMs * 2 ** attempt));
       } else {
-        // Full jitter backoff: random between 0 and min(maxDelay, base * 2^attempt)
+        // Full jitter backoff
         const cap = Math.min(maxDelayMs, baseDelayMs * 2 ** attempt);
         const delay = Math.random() * cap;
         await sleep(delay);
@@ -63,13 +66,25 @@ export async function withRetry<T>(
 function extractRetryAfter(e: unknown): number | null {
   if (typeof e === "object" && e !== null) {
     const obj = e as Record<string, unknown>;
-    const headers = obj["headers"] as { get?: (name: string) => string | null } | undefined;
-    if (headers && typeof headers.get === "function") {
-      const header = headers.get("retry-after");
-      if (header) {
-        const secs = parseFloat(header);
+    const headers = obj["headers"] as any;
+    if (headers) {
+      if (typeof headers.get === "function") {
+        const header = headers.get("retry-after");
+        if (header) {
+          const secs = parseFloat(header);
+          if (!isNaN(secs)) return secs * 1000;
+        }
+      }
+      if (typeof headers["retry-after"] === "string") {
+        const secs = parseFloat(headers["retry-after"]);
         if (!isNaN(secs)) return secs * 1000;
       }
+    }
+    const message = (obj["message"] as string) || "";
+    const match = message.match(/try again in ([\d\.]+)s/i);
+    if (match && match[1]) {
+      const secs = parseFloat(match[1]);
+      if (!isNaN(secs)) return secs * 1000;
     }
   }
   return null;
